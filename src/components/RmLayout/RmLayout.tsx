@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 interface RmLayoutProps {
 	children: React.ReactNode;
@@ -10,20 +10,20 @@ export default function RmLayout({ children }: RmLayoutProps) {
 			<img
 				src="/assets/column.svg"
 				alt="column-left"
-				className="object-cover h-full fixed left-0 z-50 pointer-events-none select-none"
+				className="pointer-events-none fixed left-0 z-50 h-full object-cover select-none"
 			/>
 			<Image
 				src="/assets/detail-01.svg"
 				alt="detail-01"
 				width={100}
 				height={100}
-				className="absolute top-4 left-0 z-40 pointer-events-none select-none"
+				className="pointer-events-none absolute top-4 left-0 z-40 select-none"
 			/>
-			<div className="fixed left-0 top-0 flex bottom-0 ">
-				<div className="w-10 h-full bg-neutral-700"></div>
-				<div className="w-6 h-full bg-green-100/10"></div>
+			<div className="fixed top-0 bottom-0 left-0 flex">
+				<div className="h-full w-10 bg-neutral-700"></div>
+				<div className="h-full w-6 bg-green-100/10"></div>
 			</div>
-			<header className="fixed top-0 inset-x-0 h-14 flex items-center justify-center bg-[#69533B] z-10">
+			<header className="absolute inset-x-0 top-0 z-10 flex h-14 items-center justify-center bg-[#69533B]">
 				<Image
 					src="/assets/logo.svg"
 					alt="logo"
@@ -37,7 +37,7 @@ export default function RmLayout({ children }: RmLayoutProps) {
 				alt="detail-02"
 				width={100}
 				height={100}
-				className="absolute top-4 right-0 z-40 pointer-events-none select-none"
+				className="pointer-events-none absolute top-4 right-0 z-40 select-none"
 			/>
 
 			<Image
@@ -45,23 +45,23 @@ export default function RmLayout({ children }: RmLayoutProps) {
 				alt="detail-04"
 				width={30}
 				height={30}
-				className="absolute top-5 right-24 z-20 pointer-events-none select-none"
+				className="pointer-events-none absolute top-5 right-24 z-20 select-none"
 			/>
 			<Image
 				src="/assets/detail-03.svg"
 				alt="detail-03"
 				width={100}
 				height={100}
-				className="absolute top-0 right-0 z-10 pointer-events-none select-none"
+				className="pointer-events-none absolute top-0 right-0 z-10 select-none"
 			/>
-			<div className="fixed right-0 flex justify-end items-end top-0 bottom-0">
-				<div className="w-6 h-full bg-green-100/10"></div>
-				<div className="w-10 h-full bg-neutral-700"></div>
+			<div className="fixed top-0 right-0 bottom-0 flex items-end justify-end">
+				<div className="h-full w-6 bg-green-100/10"></div>
+				<div className="h-full w-10 bg-neutral-700"></div>
 			</div>
 			<img
 				src="/assets/column.svg"
 				alt="column-right"
-				className="object-cover h-full fixed right-0 z-30 pointer-events-none select-none"
+				className="pointer-events-none fixed right-0 z-30 h-full object-cover select-none"
 			/>
 
 			{children}
