@@ -17,7 +17,8 @@ export default function RmLayout({ children }: RmLayoutProps) {
 				alt="detail-01"
 				width={100}
 				height={100}
-				className="pointer-events-none absolute top-4 left-0 z-40 select-none"
+				draggable={false}
+				className="absolute top-4 left-0 z-40 select-none"
 			/>
 			<div className="fixed top-0 bottom-0 left-0 flex">
 				<div className="h-full w-10 bg-neutral-700"></div>
@@ -29,7 +30,8 @@ export default function RmLayout({ children }: RmLayoutProps) {
 					alt="logo"
 					width={35}
 					height={35}
-					className="pointer-events-none select-none"
+					draggable={false}
+					className="select-none"
 				/>
 			</header>
 			<Image
@@ -37,7 +39,8 @@ export default function RmLayout({ children }: RmLayoutProps) {
 				alt="detail-02"
 				width={100}
 				height={100}
-				className="pointer-events-none absolute top-4 right-0 z-40 select-none"
+				draggable={false}
+				className="absolute top-4 right-0 z-40 select-none"
 			/>
 
 			<Image
@@ -45,14 +48,16 @@ export default function RmLayout({ children }: RmLayoutProps) {
 				alt="detail-04"
 				width={30}
 				height={30}
-				className="pointer-events-none absolute top-5 right-24 z-20 select-none"
+				draggable={false}
+				className="absolute top-5 right-24 z-20 select-none"
 			/>
 			<Image
 				src="/assets/detail-03.svg"
 				alt="detail-03"
 				width={100}
 				height={100}
-				className="pointer-events-none absolute top-0 right-0 z-10 select-none"
+				draggable={false}
+				className="absolute top-0 right-0 z-10 select-none"
 			/>
 			<div className="fixed top-0 right-0 bottom-0 flex items-end justify-end">
 				<div className="h-full w-6 bg-green-100/10"></div>

@@ -16,7 +16,8 @@ export default function RmCharacterCard({ character }: RmCharacterCardProps) {
 						alt={character.name}
 						width={70}
 						height={70}
-						className="pointer-events-none border border-neutral-700 select-none max-xl:!h-14 max-xl:!w-14"
+						draggable={false}
+						className="border border-neutral-700 select-none max-xl:!h-14 max-xl:!w-14"
 					/>
 				</div>
 			</div>

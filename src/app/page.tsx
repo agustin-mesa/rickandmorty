@@ -43,9 +43,10 @@ export default function Home() {
 					<Image
 						src="/assets/button-plus.svg"
 						alt="plus"
-						width={100}
-						height={100}
-						className="cursor-pointer transition-all duration-300 select-none hover:brightness-95"
+						width={80}
+						height={80}
+						draggable={false}
+						className="cursor-pointer transition-all duration-300 select-none hover:brightness-95 active:scale-95"
 					/>
 				</div>
 
