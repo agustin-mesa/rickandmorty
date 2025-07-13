@@ -32,7 +32,7 @@ export default function Home() {
 							<h1 className="text-2xl font-bold text-[#CAB580]">CHARACTER #1</h1>
 						</div>
 					</div>
-					<div className="grid max-h-[40vh] grid-cols-2 gap-4 overflow-y-auto px-4 max-xl:grid-cols-1">
+					<div className="z-50 grid max-h-[40vh] grid-cols-2 gap-4 overflow-y-auto px-4 max-xl:grid-cols-1">
 						{characters?.results?.map((character) => (
 							<RmCharacterCard key={character.id} character={character} />
 						))}
@@ -61,7 +61,7 @@ export default function Home() {
 							<h1 className="text-2xl font-bold text-[#CAB580]">CHARACTER #2</h1>
 						</div>
 					</div>
-					<div className="grid max-h-[40vh] grid-cols-2 gap-4 overflow-y-auto px-4 max-xl:grid-cols-1">
+					<div className="z-50 grid max-h-[40vh] grid-cols-2 gap-4 overflow-y-auto px-4 max-xl:grid-cols-1">
 						{characters?.results?.map((character) => (
 							<RmCharacterCard key={character.id} character={character} />
 						))}
