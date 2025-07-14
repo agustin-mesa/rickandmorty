@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
@@ -9,16 +9,9 @@ interface IntroVideoPlayerProps {
 }
 
 export default function IntroVideoPlayer({ children }: IntroVideoPlayerProps) {
-	const audioRef = useRef<HTMLAudioElement>(null);
 	const [showChildren, setShowChildren] = useState(false);
 	const [hideGif, setHideGif] = useState(false);
 	const [isGifLoaded, setIsGifLoaded] = useState(false);
-
-	useEffect(() => {
-		if (audioRef.current) {
-			audioRef.current.volume = 0.3;
-		}
-	}, []);
 
 	useEffect(() => {
 		if (!showChildren && isGifLoaded) {
@@ -81,8 +74,6 @@ export default function IntroVideoPlayer({ children }: IntroVideoPlayerProps) {
 					/>
 				</motion.div>
 			</motion.div>
-
-			{isGifLoaded && <audio ref={audioRef} src="/sounds/intro-music.mp3" autoPlay />}
 		</>
 	);
 }
