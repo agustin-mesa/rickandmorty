@@ -24,7 +24,7 @@ export default function UiPaginationButton({
 			onClick={() => onPageChange(pageNumber)}
 			disabled={isLoading}
 			className={helpers.cn(
-				'flex h-8 w-8 items-center justify-center rounded border border-neutral-700 text-sm font-bold transition-all',
+				'flex h-8 w-8 items-center justify-center rounded border border-neutral-700 text-sm font-bold transition-all active:scale-95',
 				isActive
 					? 'bg-[#CAB580] text-neutral-800 shadow-lg'
 					: 'bg-[#FFEFD8] text-neutral-800 hover:bg-[#FFE0B4] active:scale-95',

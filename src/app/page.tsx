@@ -1,5 +1,6 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { CharacterSection } from '@/components/CharacterSection';
 import { ConnectionButton } from '@/components/ConnectionButton';
 import { EpisodeSection } from '@/components/EpisodeSection';
@@ -7,6 +8,12 @@ import { PageHeader } from '@/components/PageHeader';
 import { CharactersRepository } from '@/repository/CharactersRepository';
 import { useConnectionsStore } from '@/store/connections';
 import { useEffect } from 'react';
+import {
+	pageVariants,
+	loadingVariants,
+	characterSectionsVariants,
+	episodeSectionsVariants
+} from './animations';
 
 const charactersRepository = new CharactersRepository();
 
@@ -55,25 +62,35 @@ export default function Home() {
 
 	if (!charactersDataFirst || !charactersDataSecond) {
 		return (
-			<div className="flex min-h-[100dvh] items-center justify-center">
+			<motion.div
+				className="flex min-h-[100dvh] items-center justify-center"
+				variants={loadingVariants}
+				initial="hidden"
+				animate="visible"
+			>
 				<div className="text-center">
 					<div className="text-xl font-bold text-[#CAB580]">Loading...</div>
 					<div className="text-sm text-neutral-300">
 						Fetching Rick and Morty characters
 					</div>
 				</div>
-			</div>
+			</motion.div>
 		);
 	}
 
 	return (
-		<div className="max-w-8xl mx-auto flex min-h-[100dvh] flex-col justify-center gap-4 px-8 pt-10">
+		<motion.div
+			className="max-w-8xl mx-auto flex min-h-[100dvh] flex-col justify-center gap-4 px-8 pt-10"
+			variants={pageVariants}
+			initial="hidden"
+			animate="visible"
+		>
 			<PageHeader
 				title="Find connections"
 				description="Click to explore episode connections between characters"
 			/>
 
-			<div className="flex gap-2">
+			<motion.div className="flex gap-2" variants={characterSectionsVariants}>
 				<CharacterSection
 					characters={charactersDataFirst.results}
 					title="CHARACTER #1"
@@ -95,9 +112,9 @@ export default function Home() {
 					pagination={paginationSecond}
 					onPageChange={(page) => handlePageChange(page, 'SECOND')}
 				/>
-			</div>
+			</motion.div>
 
-			<div className="flex gap-4">
+			<motion.div className="flex gap-4" variants={episodeSectionsVariants}>
 				<EpisodeSection
 					imageSrc="/assets/table-03.svg"
 					imageAlt="table-03"
@@ -115,7 +132,7 @@ export default function Home() {
 					imageAlt="table-05"
 					positionCharacter="SECOND"
 				/>
-			</div>
-		</div>
+			</motion.div>
+		</motion.div>
 	);
 }

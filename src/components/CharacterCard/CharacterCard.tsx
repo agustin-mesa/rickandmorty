@@ -1,11 +1,13 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { helpers } from '@/utils/helpers';
 import { Character } from '@/repository/CharactersRepository';
 import { CharacterImage } from '@/components/CharacterImage';
 import { useCharacterCard } from '@/hooks/useCharacterCard';
 import { useConnectionsStore } from '@/store/connections';
 import Image from 'next/image';
+import { characterCardVariants } from './animations';
 
 interface CharacterCardProps {
 	character: Character;
@@ -20,9 +22,14 @@ export default function CharacterCard({ character, positionCharacter }: Characte
 
 	if (!character) {
 		return (
-			<div className="flex items-center justify-center p-4">
+			<motion.div
+				className="flex items-center justify-center p-4"
+				variants={characterCardVariants}
+				initial="hidden"
+				animate="visible"
+			>
 				<div className="text-sm text-neutral-600">Character not found</div>
-			</div>
+			</motion.div>
 		);
 	}
 

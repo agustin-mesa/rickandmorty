@@ -1,5 +1,7 @@
+import { motion } from 'framer-motion';
 import { UiPaginationButton } from '@/components/ui/UiPaginationButton';
 import { UiPaginationNavButton } from '@/components/ui/UiPaginationNavButton';
+import { paginationVariants, paginationButtonVariants } from './animations';
 
 interface UiPaginationProps {
 	currentPage: number;
@@ -20,31 +22,41 @@ export default function UiPagination({
 	const canGoNext = currentPage < totalPages;
 
 	return (
-		<div className="flex items-center justify-center gap-2 p-2">
-			<UiPaginationNavButton
-				onClick={() => onPageChange(currentPage - 1)}
-				disabled={!canGoPrevious || isLoading}
-				direction="previous"
-			/>
+		<motion.div
+			className="flex items-center justify-center gap-2 p-2"
+			variants={paginationVariants}
+			initial="hidden"
+			animate="visible"
+		>
+			<motion.div variants={paginationButtonVariants}>
+				<UiPaginationNavButton
+					onClick={() => onPageChange(currentPage - 1)}
+					disabled={!canGoPrevious || isLoading}
+					direction="previous"
+				/>
+			</motion.div>
 
-			<div className="flex items-center gap-1">
+			<motion.div className="flex items-center gap-1" variants={paginationVariants}>
 				{Array.from({ length: Math.min(5, totalPages) }, (_, i) => (
-					<UiPaginationButton
-						key={i}
-						index={i}
-						currentPage={currentPage}
-						totalPages={totalPages}
-						onPageChange={onPageChange}
-						isLoading={isLoading}
-					/>
+					<motion.div key={i} variants={paginationButtonVariants}>
+						<UiPaginationButton
+							index={i}
+							currentPage={currentPage}
+							totalPages={totalPages}
+							onPageChange={onPageChange}
+							isLoading={isLoading}
+						/>
+					</motion.div>
 				))}
-			</div>
+			</motion.div>
 
-			<UiPaginationNavButton
-				onClick={() => onPageChange(currentPage + 1)}
-				disabled={!canGoNext || isLoading}
-				direction="next"
-			/>
-		</div>
+			<motion.div variants={paginationButtonVariants}>
+				<UiPaginationNavButton
+					onClick={() => onPageChange(currentPage + 1)}
+					disabled={!canGoNext || isLoading}
+					direction="next"
+				/>
+			</motion.div>
+		</motion.div>
 	);
 }

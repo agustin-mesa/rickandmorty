@@ -1,7 +1,15 @@
 'use client';
 
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { useConnectionsStore } from '@/store/connections';
+import {
+	connectionButtonVariants,
+	buttonImageVariants,
+	loadingSpinnerVariants,
+	buttonTextVariants,
+	pulseVariants
+} from './animations';
 
 export default function ConnectionButton() {
 	const { charactersSelected, episodesLoading, calculateFilteredEpisodes } =
@@ -17,38 +25,64 @@ export default function ConnectionButton() {
 	};
 
 	return (
-		<div className="flex flex-col items-center justify-center gap-2">
+		<motion.div
+			className="flex flex-col items-center justify-center gap-2"
+			variants={connectionButtonVariants}
+			initial="hidden"
+			animate="visible"
+		>
 			<div className="relative">
-				<Image
-					src="/assets/button-plus.svg"
-					alt="plus"
-					width={80}
-					height={80}
-					draggable={false}
-					className={`transition-all duration-300 select-none ${
-						isDisabled
-							? 'cursor-not-allowed opacity-50 grayscale'
-							: 'cursor-pointer hover:scale-105 hover:brightness-95 active:scale-95'
-					} `}
+				<motion.div
+					variants={buttonImageVariants}
+					initial="initial"
+					animate={isDisabled ? 'disabled' : 'enabled'}
+					whileHover={!isDisabled ? 'hover' : {}}
+					whileTap={!isDisabled ? 'tap' : {}}
 					onClick={handleConnectionClick}
-				/>
+				>
+					<Image
+						src="/assets/button-plus.svg"
+						alt="plus"
+						width={80}
+						height={80}
+						draggable={false}
+						className="cursor-pointer select-none"
+					/>
+				</motion.div>
 
-				{episodesLoading && (
-					<div className="absolute inset-0 flex items-center justify-center">
-						<div className="h-8 w-8 animate-spin rounded-full border-b-2 border-[#CAB580]"></div>
-					</div>
-				)}
+				<AnimatePresence>
+					{episodesLoading && (
+						<motion.div
+							className="absolute inset-0 flex items-center justify-center"
+							variants={loadingSpinnerVariants}
+							initial="initial"
+							animate="visible"
+							exit="hidden"
+						>
+							<div className="h-8 w-8 animate-spin rounded-full border-b-2 border-[#CAB580]"></div>
+						</motion.div>
+					)}
+				</AnimatePresence>
 			</div>
 
-			<div className="text-center">
-				<div className="text-xs text-neutral-400">
+			<motion.div
+				className="text-center"
+				variants={buttonTextVariants}
+				initial="initial"
+				animate={episodesLoading ? 'loading' : 'visible'}
+			>
+				<motion.div
+					className="text-xs text-neutral-400"
+					variants={bothCharactersSelected ? pulseVariants : {}}
+					animate={bothCharactersSelected && !episodesLoading ? 'pulse' : 'initial'}
+				>
 					{!bothCharactersSelected
 						? 'Select both characters'
 						: episodesLoading
 							? 'Finding connections...'
 							: 'Find connections'}
-				</div>
-			</div>
-		</div>
+				</motion.div>
+			</motion.div>
+		</motion.div>
 	);
 }

@@ -1,8 +1,10 @@
+import { motion } from 'framer-motion';
 import { CharacterList } from '@/components/CharacterList';
 import { UiPagination } from '@/components/ui/UiPagination';
 import { TableHeader } from '@/components/TableHeader';
 import { Character } from '@/repository/CharactersRepository';
 import { PaginationInfo } from '@/store/connections';
+import { characterSectionVariants, characterListVariants, paginationVariants } from './animations';
 
 interface CharacterSectionProps {
 	characters: Character[];
@@ -24,19 +26,29 @@ export default function CharacterSection({
 	onPageChange
 }: CharacterSectionProps) {
 	return (
-		<div className="flex flex-1 flex-col gap-2">
+		<motion.div
+			className="flex flex-1 flex-col gap-2"
+			variants={characterSectionVariants}
+			initial="hidden"
+			animate="visible"
+		>
 			<TableHeader title={title} imageSrc={imageSrc} imageAlt={imageAlt} />
 
-			<div className="z-50 grid max-h-[40vh] grid-cols-2 gap-4 overflow-y-auto px-4 max-xl:grid-cols-1">
+			<motion.div
+				className="z-50 grid max-h-[40vh] grid-cols-2 gap-4 overflow-y-auto px-4 max-xl:grid-cols-1"
+				variants={characterListVariants}
+			>
 				<CharacterList characters={characters} positionCharacter={positionCharacter} />
-			</div>
+			</motion.div>
 
-			<UiPagination
-				currentPage={pagination.currentPage}
-				totalPages={pagination.totalPages}
-				onPageChange={onPageChange}
-				isLoading={pagination.isLoading}
-			/>
-		</div>
+			<motion.div variants={paginationVariants}>
+				<UiPagination
+					currentPage={pagination.currentPage}
+					totalPages={pagination.totalPages}
+					onPageChange={onPageChange}
+					isLoading={pagination.isLoading}
+				/>
+			</motion.div>
+		</motion.div>
 	);
 }

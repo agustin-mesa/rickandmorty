@@ -1,4 +1,6 @@
+import { motion } from 'framer-motion';
 import { helpers } from '@/utils/helpers';
+import { navButtonHoverVariants, navButtonDirectionVariants } from './animations';
 
 interface UiPaginationNavButtonProps {
 	onClick: () => void;
@@ -14,7 +16,7 @@ export default function UiPaginationNavButton({
 	const symbol = direction === 'previous' ? '‹' : '›';
 
 	return (
-		<button
+		<motion.button
 			onClick={onClick}
 			disabled={disabled}
 			className={helpers.cn(
@@ -23,8 +25,21 @@ export default function UiPaginationNavButton({
 					? 'bg-[#FFEFD8] text-neutral-800 hover:bg-[#FFE0B4] active:scale-95'
 					: 'cursor-not-allowed bg-neutral-500 text-neutral-400'
 			)}
+			variants={navButtonHoverVariants}
+			initial="initial"
+			whileHover={!disabled ? 'hover' : {}}
+			whileTap={!disabled ? 'tap' : {}}
 		>
-			{symbol}
-		</button>
+			<motion.span
+				variants={navButtonDirectionVariants}
+				initial="initial"
+				animate={!disabled ? 'initial' : 'initial'}
+				whileHover={
+					!disabled ? (direction === 'previous' ? 'hoverPrevious' : 'hoverNext') : {}
+				}
+			>
+				{symbol}
+			</motion.span>
+		</motion.button>
 	);
 }
