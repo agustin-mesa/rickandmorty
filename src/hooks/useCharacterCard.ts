@@ -2,7 +2,7 @@ import { useConnectionsStore } from '@/store/connections';
 import { Character } from '@/repository/CharactersRepository';
 
 export function useCharacterCard(character: Character, positionCharacter: 'FIRST' | 'SECOND') {
-	const { setCharacterSelected } = useConnectionsStore();
+	const { setCharacterSelected, charactersSelected } = useConnectionsStore();
 
 	const playClickSound = () => {
 		try {
@@ -17,6 +17,13 @@ export function useCharacterCard(character: Character, positionCharacter: 'FIRST
 	};
 
 	const handleCharacterClick = () => {
+		const otherPosition = positionCharacter === 'FIRST' ? 'SECOND' : 'FIRST';
+		const otherCharacter = charactersSelected[otherPosition];
+
+		if (otherCharacter && otherCharacter.id === character.id) {
+			return;
+		}
+
 		playClickSound();
 		setCharacterSelected({ character, position: positionCharacter });
 	};

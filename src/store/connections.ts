@@ -28,7 +28,7 @@ export interface ConnectionsStore {
 	filteredEpisodes: FilteredEpisodes;
 	episodesLoading: boolean;
 
-	// Acciones
+	// Actions
 	setCharacterSelected: (params: { character: Character; position: 'FIRST' | 'SECOND' }) => void;
 
 	setCharactersDataFirst: (data: CharactersResponse) => void;
@@ -41,7 +41,7 @@ export interface ConnectionsStore {
 	setEpisodesLoading: (loading: boolean) => void;
 	resetFilteredEpisodes: () => void;
 
-	// Function to get filtered episodes
+	// Function to get filtered episodes (shared, firstCharacterOnly, secondCharacterOnly)
 	calculateFilteredEpisodes: () => void;
 }
 
