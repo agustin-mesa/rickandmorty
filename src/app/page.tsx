@@ -23,6 +23,7 @@ export default function Home() {
 		charactersDataSecond,
 		paginationFirst,
 		paginationSecond,
+		filteredEpisodes,
 		setCharactersDataFirst,
 		setCharactersDataSecond,
 		setPaginationFirst,
@@ -59,6 +60,11 @@ export default function Home() {
 	const handlePageChange = (page: number, position: 'FIRST' | 'SECOND') => {
 		loadCharacters(page, position);
 	};
+
+	const hasSearchResults =
+		filteredEpisodes.firstCharacterOnly.length > 0 ||
+		filteredEpisodes.secondCharacterOnly.length > 0 ||
+		filteredEpisodes.shared.length > 0;
 
 	if (!charactersDataFirst || !charactersDataSecond) {
 		return (
@@ -116,25 +122,30 @@ export default function Home() {
 				<ConnectionButton className="hidden max-md:flex" />
 			</motion.div>
 
-			<motion.div className="flex gap-4 max-md:flex-col" variants={episodeSectionsVariants}>
-				<EpisodeSection
-					imageSrc="/assets/table-03.svg"
-					imageAlt="table-03"
-					positionCharacter="FIRST"
-				/>
+			{hasSearchResults && (
+				<motion.div
+					className="flex gap-4 max-md:flex-col"
+					variants={episodeSectionsVariants}
+				>
+					<EpisodeSection
+						imageSrc="/assets/table-03.svg"
+						imageAlt="table-03"
+						positionCharacter="FIRST"
+					/>
 
-				<EpisodeSection
-					imageSrc="/assets/table-04.svg"
-					imageAlt="table-04"
-					positionCharacter="BETWEEN"
-				/>
+					<EpisodeSection
+						imageSrc="/assets/table-04.svg"
+						imageAlt="table-04"
+						positionCharacter="BETWEEN"
+					/>
 
-				<EpisodeSection
-					imageSrc="/assets/table-05.svg"
-					imageAlt="table-05"
-					positionCharacter="SECOND"
-				/>
-			</motion.div>
+					<EpisodeSection
+						imageSrc="/assets/table-05.svg"
+						imageAlt="table-05"
+						positionCharacter="SECOND"
+					/>
+				</motion.div>
+			)}
 		</motion.div>
 	);
 }

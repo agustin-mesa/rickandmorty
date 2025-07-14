@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
@@ -9,8 +9,15 @@ interface IntroVideoPlayerProps {
 }
 
 export default function IntroVideoPlayer({ children }: IntroVideoPlayerProps) {
+	const audioRef = useRef<HTMLAudioElement>(null);
 	const [showChildren, setShowChildren] = useState(false);
 	const [hideGif, setHideGif] = useState(false);
+
+	useEffect(() => {
+		if (audioRef.current) {
+			audioRef.current.volume = 0.3;
+		}
+	}, []);
 
 	useEffect(() => {
 		if (!showChildren) {
@@ -57,7 +64,7 @@ export default function IntroVideoPlayer({ children }: IntroVideoPlayerProps) {
 					draggable={false}
 				/>
 			</motion.div>
-			<audio src="/sounds/intro-music.mp3" autoPlay />
+			<audio ref={audioRef} src="/sounds/intro-music.mp3" autoPlay />
 		</>
 	);
 }
