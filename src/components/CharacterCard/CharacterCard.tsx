@@ -4,6 +4,7 @@ import { helpers } from '@/utils/helpers';
 import { Character } from '@/repository/CharactersRepository';
 import { CharacterImage } from '@/components/CharacterImage';
 import { useCharacterCard } from '@/hooks/useCharacterCard';
+import { useConnectionsStore } from '@/store/connections';
 import Image from 'next/image';
 
 interface CharacterCardProps {
@@ -13,6 +14,9 @@ interface CharacterCardProps {
 
 export default function CharacterCard({ character, positionCharacter }: CharacterCardProps) {
 	const { handleCharacterClick } = useCharacterCard(character, positionCharacter);
+	const { charactersSelected } = useConnectionsStore();
+
+	const isSelected = charactersSelected[positionCharacter]?.id === character.id;
 
 	if (!character) {
 		return (
@@ -27,11 +31,25 @@ export default function CharacterCard({ character, positionCharacter }: Characte
 			className="group flex cursor-pointer gap-4 transition-all duration-300 select-none hover:scale-105"
 			onClick={handleCharacterClick}
 		>
-			<div className="relative h-max shadow-green-400 transition-all group-hover:shadow-lg before:absolute before:inset-0 before:z-0 before:mt-0 before:-mr-2 before:-mb-1 before:ml-2 before:max-h-28 before:rotate-3 before:border before:border-neutral-700 before:bg-neutral-300">
-				<CharacterImage src={character.image} alt={character.name} size={65} />
+			<div
+				className={helpers.cn(
+					'relative h-max transition-all',
+					isSelected
+						? 'shadow-lg shadow-green-400'
+						: 'shadow-green-400 group-hover:shadow-lg'
+				)}
+			>
+				<CharacterImage src={character.image} alt={character.name} size={60} />
 			</div>
 
-			<div className="relative h-full flex-1 bg-[#FFEFD8] transition-all duration-300 group-hover:bg-[#FFE0B4]">
+			<div
+				className={helpers.cn(
+					'relative h-full flex-1 transition-all duration-300',
+					isSelected
+						? 'bg-[#FFE0B4] shadow-lg shadow-green-400'
+						: 'bg-[#FFEFD8] shadow-green-400 group-hover:bg-[#FFE0B4] group-hover:shadow-lg'
+				)}
+			>
 				<div className="flex h-full flex-1 p-2">
 					<div className="flex h-full flex-1 flex-col gap-2 border-t border-r border-amber-950/30 pt-1">
 						<h1 className="text-md line-clamp-2 leading-6 font-bold text-neutral-800">

@@ -73,7 +73,7 @@ export default function Home() {
 				description="Click to explore episode connections between characters"
 			/>
 
-			<div className="flex gap-6">
+			<div className="flex gap-2">
 				<CharacterSection
 					characters={charactersDataFirst.results}
 					title="CHARACTER #1"
