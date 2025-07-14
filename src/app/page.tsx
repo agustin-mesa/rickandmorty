@@ -93,7 +93,7 @@ export default function Home() {
 		>
 			<PageHeader
 				title="Find connections"
-				description="Click to explore episode connections between characters"
+				description="Explore episode connections between characters"
 			/>
 
 			<motion.div className="flex gap-2 max-md:flex-col" variants={characterSectionsVariants}>
