@@ -12,10 +12,12 @@ const charactersRepository = new CharactersRepository();
 
 export default function Home() {
 	const {
-		charactersData,
+		charactersDataFirst,
+		charactersDataSecond,
 		paginationFirst,
 		paginationSecond,
-		setCharactersData,
+		setCharactersDataFirst,
+		setCharactersDataSecond,
 		setPaginationFirst,
 		setPaginationSecond
 	} = useConnectionsStore();
@@ -27,6 +29,8 @@ export default function Home() {
 
 	const loadCharacters = async (page: number, position: 'FIRST' | 'SECOND') => {
 		const setPagination = position === 'FIRST' ? setPaginationFirst : setPaginationSecond;
+		const setCharactersData =
+			position === 'FIRST' ? setCharactersDataFirst : setCharactersDataSecond;
 
 		setPagination({ isLoading: true });
 
@@ -49,7 +53,7 @@ export default function Home() {
 		loadCharacters(page, position);
 	};
 
-	if (!charactersData) {
+	if (!charactersDataFirst || !charactersDataSecond) {
 		return (
 			<div className="flex min-h-[100dvh] items-center justify-center">
 				<div className="text-center">
@@ -71,7 +75,7 @@ export default function Home() {
 
 			<div className="flex gap-6">
 				<CharacterSection
-					characters={charactersData.results}
+					characters={charactersDataFirst.results}
 					title="CHARACTER #1"
 					imageSrc="/assets/table-01.svg"
 					imageAlt="table-01"
@@ -83,7 +87,7 @@ export default function Home() {
 				<ConnectionButton />
 
 				<CharacterSection
-					characters={charactersData.results}
+					characters={charactersDataSecond.results}
 					title="CHARACTER #2"
 					imageSrc="/assets/table-02.svg"
 					imageAlt="table-02"

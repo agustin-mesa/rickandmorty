@@ -18,8 +18,9 @@ export interface ConnectionsStore {
 	// Personajes seleccionados
 	charactersSelected: Record<string, Character | null>;
 
-	// Datos de paginación para personajes
-	charactersData: CharactersResponse | null;
+	// Datos de paginación para personajes - cada sección tiene su propia data
+	charactersDataFirst: CharactersResponse | null;
+	charactersDataSecond: CharactersResponse | null;
 	paginationFirst: PaginationInfo;
 	paginationSecond: PaginationInfo;
 
@@ -30,7 +31,8 @@ export interface ConnectionsStore {
 	// Acciones
 	setCharacterSelected: (params: { character: Character; position: 'FIRST' | 'SECOND' }) => void;
 
-	setCharactersData: (data: CharactersResponse) => void;
+	setCharactersDataFirst: (data: CharactersResponse) => void;
+	setCharactersDataSecond: (data: CharactersResponse) => void;
 
 	setPaginationFirst: (pagination: Partial<PaginationInfo>) => void;
 	setPaginationSecond: (pagination: Partial<PaginationInfo>) => void;
@@ -54,7 +56,8 @@ export const useConnectionsStore = create<ConnectionsStore>((set, get) => ({
 		SECOND: null
 	},
 
-	charactersData: null,
+	charactersDataFirst: null,
+	charactersDataSecond: null,
 
 	paginationFirst: {
 		currentPage: 1,
@@ -85,7 +88,8 @@ export const useConnectionsStore = create<ConnectionsStore>((set, get) => ({
 		}, 0);
 	},
 
-	setCharactersData: (data) => set({ charactersData: data }),
+	setCharactersDataFirst: (data) => set({ charactersDataFirst: data }),
+	setCharactersDataSecond: (data) => set({ charactersDataSecond: data }),
 
 	setPaginationFirst: (pagination) =>
 		set({
