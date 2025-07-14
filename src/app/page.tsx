@@ -69,7 +69,7 @@ export default function Home() {
 				animate="visible"
 			>
 				<div className="text-center">
-					<div className="text-xl font-bold text-[#CAB580]">Loading...</div>
+					<div className="text-title text-xl font-bold">Loading...</div>
 					<div className="text-sm text-neutral-300">
 						Fetching Rick and Morty characters
 					</div>

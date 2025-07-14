@@ -42,4 +42,25 @@ html {
 
 @theme {
   --container-8xl: 90rem;
+
+  /* Primary colors */
+  --color-primary: #CAB580;
+  --color-primary-dark: #84683D;
+
+  /* Background colors */
+  --color-surface: #FFEFD8;
+  --color-surface-hover: #FFE0B4;
+  --color-surface-dark: #69533B;
+
+  /* Episode section colors */
+  --color-episode-primary: #475A62;
+  --color-episode-secondary: #5A7580;
+
+  /* Semantic mappings */
+  --color-header: var(--color-surface-dark);
+  --color-card: var(--color-surface);
+  --color-card-hover: var(--color-surface-hover);
+  --color-card-active: var(--color-primary);
+  --color-title: var(--color-primary);
+  --color-accent: var(--color-primary-dark);
 }

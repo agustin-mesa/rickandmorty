@@ -64,7 +64,7 @@ export default function ConnectionButton({ className }: ConnectionButtonProps) {
 							animate="visible"
 							exit="hidden"
 						>
-							<div className="h-8 w-8 animate-spin rounded-full border-b-2 border-[#CAB580]"></div>
+							<div className="border-title h-8 w-8 animate-spin rounded-full border-b-2"></div>
 						</motion.div>
 					)}
 				</AnimatePresence>

@@ -22,7 +22,7 @@ export default function UiPaginationNavButton({
 			className={helpers.cn(
 				'flex h-8 w-8 items-center justify-center rounded border border-neutral-700 text-sm font-bold transition-all',
 				!disabled
-					? 'bg-[#FFEFD8] text-neutral-800 hover:bg-[#FFE0B4] active:scale-95'
+					? 'bg-card hover:bg-card-hover text-neutral-800 active:scale-95'
 					: 'cursor-not-allowed bg-neutral-500 text-neutral-400'
 			)}
 			variants={navButtonHoverVariants}

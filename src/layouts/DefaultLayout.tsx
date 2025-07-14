@@ -57,7 +57,7 @@ export default function DefaultLayout({ children }: DefaultLayoutProps) {
 				<div className="h-full w-10 bg-neutral-700"></div>
 				<div className="h-full w-6 bg-green-100/10"></div>
 			</div>
-			<header className="absolute inset-x-0 top-0 z-10 flex h-14 items-center justify-center bg-[#69533B]">
+			<header className="bg-header absolute inset-x-0 top-0 z-10 flex h-14 items-center justify-center">
 				<Image
 					src="/assets/brand/logo.svg"
 					alt="logo"

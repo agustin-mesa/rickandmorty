@@ -8,7 +8,7 @@ interface EpisodeItemProps {
 
 export default function EpisodeItem({ episode }: EpisodeItemProps) {
 	return (
-		<div className="flex h-full flex-1 flex-col px-2 py-1 transition-all duration-300 hover:bg-[#FFE0B4]">
+		<div className="hover:bg-card-hover flex h-full flex-1 flex-col px-2 py-1 transition-all duration-300">
 			<motion.h3
 				className="line-clamp-2 text-sm leading-6 font-bold text-neutral-800"
 				variants={episodeTitleVariants}

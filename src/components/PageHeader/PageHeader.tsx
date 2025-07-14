@@ -15,7 +15,7 @@ export default function PageHeader({ title, description }: PageHeaderProps) {
 			animate="visible"
 		>
 			<motion.h1
-				className="text-center text-xl font-bold text-[#CAB580]"
+				className="text-title text-center text-xl font-bold"
 				variants={titleVariants}
 			>
 				{title}

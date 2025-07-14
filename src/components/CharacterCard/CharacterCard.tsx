@@ -55,8 +55,8 @@ export default function CharacterCard({ character, positionCharacter }: Characte
 				className={helpers.cn(
 					'relative h-full flex-1 transition-all duration-300',
 					isSelected
-						? 'bg-[#FFE0B4] shadow-lg shadow-green-400'
-						: 'bg-[#FFEFD8] shadow-green-400 group-hover:bg-[#FFE0B4] group-hover:shadow-lg'
+						? 'bg-card-hover shadow-lg shadow-green-400'
+						: 'bg-card group-hover:bg-card-hover shadow-green-400 group-hover:shadow-lg'
 				)}
 			>
 				<div className="flex h-full flex-1 p-2">
@@ -78,7 +78,7 @@ export default function CharacterCard({ character, positionCharacter }: Characte
 							</div>
 
 							<div className="flex w-max items-center gap-1">
-								<div className="flex size-4 items-center justify-center rounded-full border bg-[#84683D]">
+								<div className="bg-accent flex size-4 items-center justify-center rounded-full border">
 									<div
 										className={helpers.cn(
 											'size-2.5 rounded-full border',

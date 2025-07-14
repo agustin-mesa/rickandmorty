@@ -34,9 +34,9 @@ export default function EpisodeSection({
 				title={title}
 			/>
 			<div className="flex gap-4">
-				<div className="flex-1 border border-neutral-700 bg-[#475A62] pr-1 pb-1">
-					<div className="h-full flex-1 bg-[#5A7580] p-2">
-						<div className="relative h-full flex-1 bg-[#FFEFD8]">
+				<div className="bg-episode-primary flex-1 border border-neutral-700 pr-1 pb-1">
+					<div className="bg-episode-secondary h-full flex-1 p-2">
+						<div className="bg-card relative h-full flex-1">
 							<motion.div
 								className="scrollbar-rick-morty flex max-h-[20vh] flex-col gap-2 overflow-y-auto p-2"
 								variants={episodeContentVariants}

@@ -22,7 +22,7 @@ export default function EpisodeSectionHeader({
 			/>
 			<div className="absolute inset-0 flex items-center justify-center gap-4">
 				<CharacterImageDisplay position="FIRST" showCondition={positionCharacter} />
-				<h3 className="text-md text-[#CAB580]">{title}</h3>
+				<h3 className="text-md text-title">{title}</h3>
 				<CharacterImageDisplay position="SECOND" showCondition={positionCharacter} />
 			</div>
 		</div>

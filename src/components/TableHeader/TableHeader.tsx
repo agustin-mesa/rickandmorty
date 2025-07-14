@@ -13,7 +13,7 @@ export default function TableHeader({ title, imageSrc, imageAlt }: TableHeaderPr
 				className="pointer-events-none h-full w-full object-cover select-none"
 			/>
 			<div className="absolute inset-0 flex flex-col items-center justify-center">
-				<h1 className="text-2xl font-bold text-[#CAB580] max-md:text-xl">{title}</h1>
+				<h1 className="text-title text-2xl font-bold max-md:text-xl">{title}</h1>
 			</div>
 		</div>
 	);
