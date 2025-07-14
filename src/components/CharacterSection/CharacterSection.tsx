@@ -4,7 +4,7 @@ import { UiPagination } from '@/components/ui/UiPagination';
 import { TableHeader } from '@/components/TableHeader';
 import { Character } from '@/repository/CharactersRepository';
 import { PaginationInfo } from '@/store/connections';
-import { characterSectionVariants, characterListVariants, paginationVariants } from './animations';
+import { characterListVariants, paginationVariants } from './animations';
 
 interface CharacterSectionProps {
 	characters: Character[];
@@ -26,12 +26,7 @@ export default function CharacterSection({
 	onPageChange
 }: CharacterSectionProps) {
 	return (
-		<motion.div
-			className="flex flex-1 flex-col gap-2"
-			variants={characterSectionVariants}
-			initial="hidden"
-			animate="visible"
-		>
+		<div className="flex flex-1 flex-col gap-2">
 			<TableHeader title={title} imageSrc={imageSrc} imageAlt={imageAlt} />
 
 			<motion.div
@@ -49,6 +44,6 @@ export default function CharacterSection({
 					isLoading={pagination.isLoading}
 				/>
 			</motion.div>
-		</motion.div>
+		</div>
 	);
 }

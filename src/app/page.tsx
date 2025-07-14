@@ -80,7 +80,7 @@ export default function Home() {
 
 	return (
 		<motion.div
-			className="max-w-8xl mx-auto flex min-h-[100dvh] flex-col justify-center gap-4 px-8 pt-10"
+			className="max-w-8xl mx-auto flex min-h-[100dvh] flex-col justify-center gap-4 px-8 pt-10 max-md:px-4 max-md:pt-20 max-md:pb-10"
 			variants={pageVariants}
 			initial="hidden"
 			animate="visible"
@@ -90,7 +90,7 @@ export default function Home() {
 				description="Click to explore episode connections between characters"
 			/>
 
-			<motion.div className="flex gap-2" variants={characterSectionsVariants}>
+			<motion.div className="flex gap-2 max-md:flex-col" variants={characterSectionsVariants}>
 				<CharacterSection
 					characters={charactersDataFirst.results}
 					title="CHARACTER #1"
@@ -101,7 +101,7 @@ export default function Home() {
 					onPageChange={(page) => handlePageChange(page, 'FIRST')}
 				/>
 
-				<ConnectionButton />
+				<ConnectionButton className="max-md:hidden" />
 
 				<CharacterSection
 					characters={charactersDataSecond.results}
@@ -112,9 +112,11 @@ export default function Home() {
 					pagination={paginationSecond}
 					onPageChange={(page) => handlePageChange(page, 'SECOND')}
 				/>
+
+				<ConnectionButton className="hidden max-md:flex" />
 			</motion.div>
 
-			<motion.div className="flex gap-4" variants={episodeSectionsVariants}>
+			<motion.div className="flex gap-4 max-md:flex-col" variants={episodeSectionsVariants}>
 				<EpisodeSection
 					imageSrc="/assets/table-03.svg"
 					imageAlt="table-03"

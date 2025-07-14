@@ -10,8 +10,13 @@ import {
 	buttonTextVariants,
 	pulseVariants
 } from './animations';
+import { helpers } from '@/utils/helpers';
 
-export default function ConnectionButton() {
+interface ConnectionButtonProps {
+	className?: string;
+}
+
+export default function ConnectionButton({ className }: ConnectionButtonProps) {
 	const { charactersSelected, episodesLoading, calculateFilteredEpisodes } =
 		useConnectionsStore();
 
@@ -26,7 +31,7 @@ export default function ConnectionButton() {
 
 	return (
 		<motion.div
-			className="flex flex-col items-center justify-center gap-2"
+			className={helpers.cn('flex flex-col items-center justify-center gap-2', className)}
 			variants={connectionButtonVariants}
 			initial="hidden"
 			animate="visible"

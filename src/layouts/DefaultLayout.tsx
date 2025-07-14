@@ -1,10 +1,43 @@
+'use client';
+
 import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 
 interface DefaultLayoutProps {
 	children: React.ReactNode;
 }
 
 export default function DefaultLayout({ children }: DefaultLayoutProps) {
+	const videoRef = useRef<HTMLVideoElement>(null);
+	const [showChildren, setShowChildren] = useState(false);
+	const [hideVideo, setHideVideo] = useState(false);
+
+	useEffect(() => {
+		const video = videoRef.current;
+		if (!video) return;
+
+		video.volume = 0.3;
+
+		const handleTimeUpdate = () => {
+			const currentTime = video.currentTime;
+
+			if (currentTime >= 4 && !showChildren) {
+				setShowChildren(true);
+
+				setTimeout(() => {
+					setHideVideo(true);
+				}, 800);
+			}
+		};
+
+		video.addEventListener('timeupdate', handleTimeUpdate);
+
+		return () => {
+			video.removeEventListener('timeupdate', handleTimeUpdate);
+		};
+	}, [showChildren]);
+
 	return (
 		<>
 			<img
@@ -69,7 +102,37 @@ export default function DefaultLayout({ children }: DefaultLayoutProps) {
 				className="pointer-events-none fixed right-0 z-30 h-full object-cover select-none"
 			/>
 
-			{children}
+			<motion.div
+				initial={{ opacity: 0 }}
+				animate={{ opacity: showChildren ? 1 : 0 }}
+				transition={{
+					duration: 0.8,
+					ease: 'easeInOut',
+					delay: showChildren ? 0.2 : 0
+				}}
+				className="relative z-40"
+			>
+				{children}
+			</motion.div>
+
+			<motion.div
+				className="fixed inset-0 z-50"
+				initial={{ opacity: 1 }}
+				animate={{ opacity: hideVideo ? 0 : 1 }}
+				transition={{
+					duration: 0.5,
+					ease: 'easeInOut'
+				}}
+				style={{ pointerEvents: hideVideo ? 'none' : 'auto' }}
+			>
+				<video
+					ref={videoRef}
+					src="/assets/videos/intro.mp4"
+					className="h-full w-full object-cover"
+					autoPlay
+					playsInline
+				/>
+			</motion.div>
 		</>
 	);
 }
