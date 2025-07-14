@@ -1,0 +1,25 @@
+import { CharacterCard } from '@/components/CharacterCard';
+import { Character } from '@/repository/CharactersRepository';
+
+interface CharacterListProps {
+	characters: Character[];
+	positionCharacter: 'FIRST' | 'SECOND';
+}
+
+export default function CharacterList({ characters, positionCharacter }: CharacterListProps) {
+	if (!characters || characters.length === 0) {
+		return (
+			<div className="flex items-center justify-center p-4">
+				<div className="text-sm text-neutral-600">No characters found</div>
+			</div>
+		);
+	}
+
+	return characters.map((character) => (
+		<CharacterCard
+			key={character.id}
+			character={character}
+			positionCharacter={positionCharacter}
+		/>
+	));
+}

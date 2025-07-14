@@ -1,5 +1,5 @@
-import { helpers } from '@/utils/helpers';
 import { UiPaginationButton } from '@/components/ui/UiPaginationButton';
+import { UiPaginationNavButton } from '@/components/ui/UiPaginationNavButton';
 
 interface UiPaginationProps {
 	currentPage: number;
@@ -21,18 +21,11 @@ export default function UiPagination({
 
 	return (
 		<div className="flex items-center justify-center gap-2 p-2">
-			<button
+			<UiPaginationNavButton
 				onClick={() => onPageChange(currentPage - 1)}
 				disabled={!canGoPrevious || isLoading}
-				className={helpers.cn(
-					'flex h-8 w-8 items-center justify-center rounded border border-neutral-700 text-sm font-bold transition-all',
-					canGoPrevious && !isLoading
-						? 'bg-[#FFEFD8] text-neutral-800 hover:bg-[#FFE0B4] active:scale-95'
-						: 'cursor-not-allowed bg-neutral-500 text-neutral-400'
-				)}
-			>
-				‹
-			</button>
+				direction="previous"
+			/>
 
 			<div className="flex items-center gap-1">
 				{Array.from({ length: Math.min(5, totalPages) }, (_, i) => (
@@ -47,18 +40,11 @@ export default function UiPagination({
 				))}
 			</div>
 
-			<button
+			<UiPaginationNavButton
 				onClick={() => onPageChange(currentPage + 1)}
 				disabled={!canGoNext || isLoading}
-				className={helpers.cn(
-					'flex h-8 w-8 items-center justify-center rounded border border-neutral-700 text-sm font-bold transition-all',
-					canGoNext && !isLoading
-						? 'bg-[#FFEFD8] text-neutral-800 hover:bg-[#FFE0B4] active:scale-95'
-						: 'cursor-not-allowed bg-neutral-500 text-neutral-400'
-				)}
-			>
-				›
-			</button>
+				direction="next"
+			/>
 		</div>
 	);
 }

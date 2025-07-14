@@ -1,5 +1,4 @@
 import { helpers } from '@/utils/helpers';
-import { useCallback } from 'react';
 
 interface UiPaginationButtonProps {
 	index: number;
@@ -16,17 +15,7 @@ export default function UiPaginationButton({
 	onPageChange,
 	isLoading = false
 }: UiPaginationButtonProps) {
-	const getPageNumber = useCallback(
-		(index: number): number => {
-			if (totalPages <= 5) return index + 1;
-			if (currentPage <= 3) return index + 1;
-			if (currentPage >= totalPages - 2) return totalPages - 4 + index;
-			return currentPage - 2 + index;
-		},
-		[currentPage, totalPages]
-	);
-
-	const pageNumber = getPageNumber(index);
+	const pageNumber = helpers.pagination.getPageNumber(index, currentPage, totalPages);
 	const isActive = pageNumber === currentPage;
 
 	return (
