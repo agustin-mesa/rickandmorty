@@ -4,6 +4,7 @@ import { helpers } from '@/utils/helpers';
 import { Character } from '@/repository/CharactersRepository';
 import { CharacterImage } from '@/components/CharacterImage';
 import { useCharacterCard } from '@/hooks/useCharacterCard';
+import Image from 'next/image';
 
 interface CharacterCardProps {
 	character: Character;
@@ -36,19 +37,33 @@ export default function CharacterCard({ character, positionCharacter }: Characte
 						<h1 className="text-md line-clamp-2 leading-6 font-bold text-neutral-800">
 							{character.name}
 						</h1>
-
-						<div className="flex w-max items-center gap-2">
-							<div className="flex size-5 items-center justify-center rounded-full border bg-[#84683D]">
-								<div
-									className={helpers.cn(
-										'size-3 rounded-full border',
-										helpers.character.getStatusColor(character.status)
-									)}
+						<div className="flex flex-col gap-1">
+							<div className="flex items-center gap-1">
+								<Image
+									src="/assets/icons/species.svg"
+									alt="species"
+									width={16}
+									height={16}
 								/>
+								<span className="line-clamp-1 max-w-36 text-xs text-neutral-800 capitalize">
+									{character.species}
+								</span>
 							</div>
-							<span className="line-clamp-1 max-w-36 text-xs text-neutral-800 capitalize">
-								{character.status} - {character.species}
-							</span>
+
+							<div className="flex w-max items-center gap-1">
+								<div className="flex size-4 items-center justify-center rounded-full border bg-[#84683D]">
+									<div
+										className={helpers.cn(
+											'size-2.5 rounded-full border',
+											helpers.character.getStatusColor(character.status)
+										)}
+									/>
+								</div>
+
+								<span className="text-xs text-neutral-800 capitalize">
+									{character.status}
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>

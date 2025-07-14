@@ -26,7 +26,7 @@ export default function DefaultLayout({ children }: DefaultLayoutProps) {
 			</div>
 			<header className="absolute inset-x-0 top-0 z-10 flex h-14 items-center justify-center bg-[#69533B]">
 				<Image
-					src="/assets/logo.svg"
+					src="/assets/brand/logo.svg"
 					alt="logo"
 					width={35}
 					height={35}
