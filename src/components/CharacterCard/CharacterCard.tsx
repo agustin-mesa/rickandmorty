@@ -44,6 +44,7 @@ export default function CharacterCard({ character, positionCharacter }: Characte
 				isDisabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer hover:scale-105'
 			)}
 			onClick={handleCharacterClick}
+			data-testid={`character-card-${character.id}`}
 		>
 			<div
 				className={helpers.cn(
@@ -69,11 +70,17 @@ export default function CharacterCard({ character, positionCharacter }: Characte
 			>
 				<div className="flex h-full flex-1 p-2">
 					<div className="flex h-full flex-1 flex-col gap-2 border-t border-r border-amber-950/30 pt-1">
-						<h1 className="text-md line-clamp-1 leading-6 font-bold text-neutral-800">
+						<h1
+							className="text-md line-clamp-1 leading-6 font-bold text-neutral-800"
+							data-testid={`character-name-${character.id}`}
+						>
 							{character.name}
 						</h1>
 						<div className="flex flex-col gap-1">
-							<div className="flex items-center gap-1">
+							<div
+								className="flex items-center gap-1"
+								data-testid={`character-species-${character.id}`}
+							>
 								<Image
 									src="/assets/icons/species.svg"
 									alt="species"
@@ -85,7 +92,10 @@ export default function CharacterCard({ character, positionCharacter }: Characte
 								</span>
 							</div>
 
-							<div className="flex w-max items-center gap-1">
+							<div
+								className="flex w-max items-center gap-1"
+								data-testid={`character-status-${character.id}`}
+							>
 								<div className="bg-accent flex size-4 items-center justify-center rounded-full border">
 									<div
 										className={helpers.cn(

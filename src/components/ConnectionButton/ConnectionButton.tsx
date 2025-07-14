@@ -35,15 +35,15 @@ export default function ConnectionButton({ className }: ConnectionButtonProps) {
 			variants={connectionButtonVariants}
 			initial="hidden"
 			animate="visible"
+			data-testid="connection-button"
 		>
 			<div className="relative">
 				<motion.div
 					variants={buttonImageVariants}
 					initial="initial"
 					animate={isDisabled ? 'disabled' : 'enabled'}
-					whileHover={!isDisabled ? 'hover' : {}}
-					whileTap={!isDisabled ? 'tap' : {}}
 					onClick={handleConnectionClick}
+					data-testid="connection-button-action"
 				>
 					<Image
 						src="/assets/button-plus.svg"
@@ -75,6 +75,7 @@ export default function ConnectionButton({ className }: ConnectionButtonProps) {
 				variants={buttonTextVariants}
 				initial="initial"
 				animate={episodesLoading ? 'loading' : 'visible'}
+				data-testid="connection-button-text"
 			>
 				<motion.div
 					className="text-xs text-neutral-400"

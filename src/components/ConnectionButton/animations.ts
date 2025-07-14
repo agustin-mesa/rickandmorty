@@ -23,22 +23,6 @@ export const buttonImageVariants: Variants = {
 		scale: 1,
 		rotate: 0
 	},
-	hover: {
-		scale: 1.05,
-		rotate: 3,
-		transition: {
-			duration: 0.2,
-			ease: 'easeOut'
-		}
-	},
-	tap: {
-		scale: 0.95,
-		rotate: 0,
-		transition: {
-			duration: 0.1,
-			ease: 'easeOut'
-		}
-	},
 	disabled: {
 		scale: 0.9,
 		rotate: 0,
