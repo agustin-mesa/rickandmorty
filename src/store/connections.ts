@@ -15,16 +15,16 @@ export interface FilteredEpisodes {
 }
 
 export interface ConnectionsStore {
-	// Personajes seleccionados
+	// Characters selected
 	charactersSelected: Record<string, Character | null>;
 
-	// Datos de paginación para personajes - cada sección tiene su propia data
+	// Pagination data for characters - each section has its own data
 	charactersDataFirst: CharactersResponse | null;
 	charactersDataSecond: CharactersResponse | null;
 	paginationFirst: PaginationInfo;
 	paginationSecond: PaginationInfo;
 
-	// Episodios filtrados
+	// Filtered episodes
 	filteredEpisodes: FilteredEpisodes;
 	episodesLoading: boolean;
 
@@ -39,8 +39,9 @@ export interface ConnectionsStore {
 
 	setFilteredEpisodes: (episodes: FilteredEpisodes) => void;
 	setEpisodesLoading: (loading: boolean) => void;
+	resetFilteredEpisodes: () => void;
 
-	// Función para obtener episodios filtrados
+	// Function to get filtered episodes
 	calculateFilteredEpisodes: () => void;
 }
 
@@ -83,9 +84,7 @@ export const useConnectionsStore = create<ConnectionsStore>((set, get) => ({
 			}
 		});
 
-		setTimeout(() => {
-			get().calculateFilteredEpisodes();
-		}, 0);
+		get().resetFilteredEpisodes();
 	},
 
 	setCharactersDataFirst: (data) => set({ charactersDataFirst: data }),
@@ -109,6 +108,7 @@ export const useConnectionsStore = create<ConnectionsStore>((set, get) => ({
 
 	setFilteredEpisodes: (episodes) => set({ filteredEpisodes: episodes }),
 	setEpisodesLoading: (loading) => set({ episodesLoading: loading }),
+	resetFilteredEpisodes: () => set({ filteredEpisodes: createEmptyFilteredEpisodes() }),
 
 	calculateFilteredEpisodes: async () => {
 		const { charactersSelected } = get();
