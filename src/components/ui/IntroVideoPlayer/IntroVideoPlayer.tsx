@@ -12,6 +12,7 @@ export default function IntroVideoPlayer({ children }: IntroVideoPlayerProps) {
 	const audioRef = useRef<HTMLAudioElement>(null);
 	const [showChildren, setShowChildren] = useState(false);
 	const [hideGif, setHideGif] = useState(false);
+	const [isGifLoaded, setIsGifLoaded] = useState(false);
 
 	useEffect(() => {
 		if (audioRef.current) {
@@ -20,13 +21,17 @@ export default function IntroVideoPlayer({ children }: IntroVideoPlayerProps) {
 	}, []);
 
 	useEffect(() => {
-		if (!showChildren) {
+		if (!showChildren && isGifLoaded) {
 			setTimeout(() => {
 				setShowChildren(true);
 				setHideGif(true);
 			}, 4500);
 		}
-	}, [showChildren]);
+	}, [showChildren, isGifLoaded]);
+
+	const handleGifLoad = () => {
+		setIsGifLoaded(true);
+	};
 
 	return (
 		<>
@@ -46,7 +51,7 @@ export default function IntroVideoPlayer({ children }: IntroVideoPlayerProps) {
 			)}
 
 			<motion.div
-				className="fixed inset-0 z-50"
+				className="fixed inset-0 z-50 bg-black"
 				initial={{ opacity: 1 }}
 				animate={{ opacity: hideGif ? 0 : 1 }}
 				transition={{
@@ -55,17 +60,29 @@ export default function IntroVideoPlayer({ children }: IntroVideoPlayerProps) {
 				}}
 				style={{ pointerEvents: hideGif ? 'none' : 'auto' }}
 			>
-				<Image
-					src="/assets/intro.gif"
-					alt="intro"
-					className="h-full w-full object-cover"
-					width={100}
-					height={100}
-					draggable={false}
-					fetchPriority="high"
-				/>
+				<motion.div
+					className="h-full w-full"
+					initial={{ opacity: 0 }}
+					animate={{ opacity: isGifLoaded ? 1 : 0 }}
+					transition={{
+						duration: 0.8,
+						ease: 'easeInOut'
+					}}
+				>
+					<Image
+						src="/assets/intro.gif"
+						alt="intro"
+						className="h-full w-full object-cover"
+						width={100}
+						height={100}
+						draggable={false}
+						fetchPriority="high"
+						onLoad={handleGifLoad}
+					/>
+				</motion.div>
 			</motion.div>
-			<audio ref={audioRef} src="/sounds/intro-music.mp3" autoPlay />
+
+			{isGifLoaded && <audio ref={audioRef} src="/sounds/intro-music.mp3" autoPlay />}
 		</>
 	);
 }
