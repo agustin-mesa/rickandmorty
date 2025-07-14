@@ -47,7 +47,7 @@ export default function CharacterCard({ character, positionCharacter }: Characte
 		>
 			<div
 				className={helpers.cn(
-					'relative h-max shadow-green-400 transition-all group-hover:shadow-lg before:absolute before:inset-0 before:z-0 before:mt-0 before:-mr-2 before:-mb-1 before:ml-2 before:max-h-28 before:rotate-3 before:border before:border-neutral-700 before:bg-neutral-300',
+					'relative h-max transition-all group-hover:shadow-lg before:absolute before:inset-0 before:z-0 before:mt-0 before:-mr-2 before:-mb-1 before:ml-2 before:max-h-28 before:rotate-3 before:border before:border-neutral-700 before:bg-neutral-300',
 					{
 						'shadow-lg shadow-green-400': isSelected,
 						'shadow-green-400 group-hover:shadow-lg': !isDisabled
