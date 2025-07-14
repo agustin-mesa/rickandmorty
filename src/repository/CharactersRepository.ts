@@ -29,14 +29,6 @@ export interface Character {
 	episode: string[];
 }
 
-export interface CharacterFilters {
-	name?: string;
-	status?: EnumCharacterStatus;
-	species?: string;
-	type?: string;
-	gender?: string;
-}
-
 export interface CharactersResponse {
 	info: {
 		count: number;
@@ -48,41 +40,11 @@ export interface CharactersResponse {
 }
 
 export class CharactersRepository extends BaseHttpRepository {
-	async getCharacters(page: number = 1, filters?: CharacterFilters): Promise<CharactersResponse> {
-		const params = new URLSearchParams();
-
-		params.append('page', page.toString());
-
-		if (filters) {
-			Object.entries(filters).forEach(([key, value]) => {
-				if (value) {
-					params.append(key, value.toString());
-				}
-			});
-		}
-
+	async getCharacters(params: { page?: number }): Promise<CharactersResponse> {
 		const response = await this.send<CharactersResponse>({
 			method: 'get',
 			path: '/character',
-			searchParams: params
-		});
-
-		return response.data;
-	}
-
-	async getCharacterById(id: number): Promise<Character> {
-		const response = await this.send<Character>({
-			method: 'get',
-			path: `/character/${id}`
-		});
-
-		return response.data;
-	}
-
-	async getCharactersByIds(ids: number[]): Promise<Character[]> {
-		const response = await this.send<Character[]>({
-			method: 'get',
-			path: `/character/${ids.join(',')}`
+			searchParams: this.objectToURLParams(params)
 		});
 
 		return response.data;

@@ -43,7 +43,7 @@ export default function Home() {
 		setPagination({ isLoading: true });
 
 		try {
-			const data = await charactersRepository.getCharacters(page);
+			const data = await charactersRepository.getCharacters({ page });
 
 			setCharactersData(data);
 			setPagination({

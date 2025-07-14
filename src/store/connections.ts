@@ -140,7 +140,7 @@ export const useConnectionsStore = create<ConnectionsStore>((set, get) => ({
 				return;
 			}
 
-			const allEpisodes = await episodesRepo.getEpisodesByIds(allEpisodeIds);
+			const allEpisodes = await episodesRepo.getEpisodesByIds({ ids: allEpisodeIds });
 
 			const firstCharacterOnly = allEpisodes.filter(
 				(episode) =>
