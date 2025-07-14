@@ -62,6 +62,7 @@ export default function IntroVideoPlayer({ children }: IntroVideoPlayerProps) {
 					width={100}
 					height={100}
 					draggable={false}
+					fetchPriority="high"
 				/>
 			</motion.div>
 			<audio ref={audioRef} src="/sounds/intro-music.mp3" autoPlay />
