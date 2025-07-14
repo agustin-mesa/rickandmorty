@@ -5,9 +5,10 @@ interface CharacterImageProps {
 	className?: string;
 	src: string;
 	alt: string;
+	size?: number;
 }
 
-export default function CharacterImage({ src, alt, className }: CharacterImageProps) {
+export default function CharacterImage({ src, alt, className, size = 40 }: CharacterImageProps) {
 	return (
 		<div
 			className={helpers.cn(
@@ -18,8 +19,8 @@ export default function CharacterImage({ src, alt, className }: CharacterImagePr
 			<Image
 				src={src}
 				alt={alt}
-				width={40}
-				height={40}
+				width={size}
+				height={size}
 				draggable={false}
 				className="border border-neutral-700 select-none max-xl:!h-14 max-xl:!w-14"
 			/>
