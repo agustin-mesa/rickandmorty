@@ -1,5 +1,5 @@
 import { Character, CharactersResponse } from '@/repository/CharactersRepository';
-import { Episode } from '@/repository/EpisodesRepository';
+import { Episode, EpisodesRepository } from '@/repository/EpisodesRepository';
 import { create } from 'zustand';
 
 export interface PaginationInfo {
@@ -120,7 +120,6 @@ export const useConnectionsStore = create<ConnectionsStore>((set, get) => ({
 		setEpisodesLoading(true);
 
 		try {
-			const { EpisodesRepository } = await import('@/repository/EpisodesRepository');
 			const episodesRepo = new EpisodesRepository();
 
 			const firstEpisodeIds = firstCharacter
