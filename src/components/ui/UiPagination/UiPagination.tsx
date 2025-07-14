@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import { UiPaginationButton } from '@/components/ui/UiPaginationButton';
 import { UiPaginationNavButton } from '@/components/ui/UiPaginationNavButton';

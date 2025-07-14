@@ -15,20 +15,16 @@ export interface FilteredEpisodes {
 }
 
 export interface ConnectionsStore {
-	// Characters selected
 	charactersSelected: Record<string, Character | null>;
 
-	// Pagination data for characters - each section has its own data
 	charactersDataFirst: CharactersResponse | null;
 	charactersDataSecond: CharactersResponse | null;
 	paginationFirst: PaginationInfo;
 	paginationSecond: PaginationInfo;
 
-	// Filtered episodes
 	filteredEpisodes: FilteredEpisodes;
 	episodesLoading: boolean;
 
-	// Actions
 	setCharacterSelected: (params: { character: Character; position: 'FIRST' | 'SECOND' }) => void;
 
 	setCharactersDataFirst: (data: CharactersResponse) => void;
@@ -41,7 +37,6 @@ export interface ConnectionsStore {
 	setEpisodesLoading: (loading: boolean) => void;
 	resetFilteredEpisodes: () => void;
 
-	// Function to get filtered episodes (shared, firstCharacterOnly, secondCharacterOnly)
 	calculateFilteredEpisodes: () => void;
 }
 
@@ -50,6 +45,12 @@ const createEmptyFilteredEpisodes = (): FilteredEpisodes => ({
 	secondCharacterOnly: [],
 	shared: []
 });
+
+const initialPaginationState: PaginationInfo = {
+	currentPage: 1,
+	totalPages: 1,
+	isLoading: false
+};
 
 export const useConnectionsStore = create<ConnectionsStore>((set, get) => ({
 	charactersSelected: {
@@ -60,26 +61,22 @@ export const useConnectionsStore = create<ConnectionsStore>((set, get) => ({
 	charactersDataFirst: null,
 	charactersDataSecond: null,
 
-	paginationFirst: {
-		currentPage: 1,
-		totalPages: 1,
-		isLoading: false
-	},
-
-	paginationSecond: {
-		currentPage: 1,
-		totalPages: 1,
-		isLoading: false
-	},
+	paginationFirst: { ...initialPaginationState },
+	paginationSecond: { ...initialPaginationState },
 
 	filteredEpisodes: createEmptyFilteredEpisodes(),
-
 	episodesLoading: false,
 
 	setCharacterSelected: (params) => {
+		const { charactersSelected } = get();
+
+		if (charactersSelected[params.position]?.id === params.character.id) {
+			return;
+		}
+
 		set({
 			charactersSelected: {
-				...get().charactersSelected,
+				...charactersSelected,
 				[params.position]: params.character
 			}
 		});
@@ -111,16 +108,16 @@ export const useConnectionsStore = create<ConnectionsStore>((set, get) => ({
 	resetFilteredEpisodes: () => set({ filteredEpisodes: createEmptyFilteredEpisodes() }),
 
 	calculateFilteredEpisodes: async () => {
-		const { charactersSelected } = get();
+		const { charactersSelected, setEpisodesLoading, setFilteredEpisodes } = get();
 		const firstCharacter = charactersSelected.FIRST;
 		const secondCharacter = charactersSelected.SECOND;
 
 		if (!firstCharacter && !secondCharacter) {
-			set({ filteredEpisodes: createEmptyFilteredEpisodes() });
+			setFilteredEpisodes(createEmptyFilteredEpisodes());
 			return;
 		}
 
-		set({ episodesLoading: true });
+		setEpisodesLoading(true);
 
 		try {
 			const { EpisodesRepository } = await import('@/repository/EpisodesRepository');
@@ -136,7 +133,7 @@ export const useConnectionsStore = create<ConnectionsStore>((set, get) => ({
 			const allEpisodeIds = [...new Set([...firstEpisodeIds, ...secondEpisodeIds])];
 
 			if (allEpisodeIds.length === 0) {
-				set({ filteredEpisodes: createEmptyFilteredEpisodes() });
+				setFilteredEpisodes(createEmptyFilteredEpisodes());
 				return;
 			}
 
@@ -157,18 +154,16 @@ export const useConnectionsStore = create<ConnectionsStore>((set, get) => ({
 					firstEpisodeIds.includes(episode.id) && secondEpisodeIds.includes(episode.id)
 			);
 
-			set({
-				filteredEpisodes: {
-					firstCharacterOnly,
-					secondCharacterOnly,
-					shared
-				}
+			setFilteredEpisodes({
+				firstCharacterOnly,
+				secondCharacterOnly,
+				shared
 			});
 		} catch (error) {
 			console.error('Error calculating filtered episodes:', error);
-			set({ filteredEpisodes: createEmptyFilteredEpisodes() });
+			setFilteredEpisodes(createEmptyFilteredEpisodes());
 		} finally {
-			set({ episodesLoading: false });
+			setEpisodesLoading(false);
 		}
 	}
 }));
