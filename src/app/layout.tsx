@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Inknut_Antiqua } from 'next/font/google';
 import './globals.css';
-import { RmLayout } from '@/components/RmLayout';
+import DefaultLayout from '@/layouts/DefaultLayout';
 
 const inknutAntiqua = Inknut_Antiqua({
 	subsets: ['latin'],
@@ -24,7 +24,7 @@ export default function RootLayout({
 				className={`${inknutAntiqua.className} h-[100dvh] overflow-y-auto antialiased`}
 				cz-shortcut-listen="true"
 			>
-				<RmLayout>{children}</RmLayout>
+				<DefaultLayout>{children}</DefaultLayout>
 			</body>
 		</html>
 	);

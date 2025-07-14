@@ -1,0 +1,1 @@
+export { default as CharacterSection } from './CharacterSection';

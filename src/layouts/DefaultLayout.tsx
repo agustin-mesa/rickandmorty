@@ -1,10 +1,10 @@
 import Image from 'next/image';
 
-interface RmLayoutProps {
+interface DefaultLayoutProps {
 	children: React.ReactNode;
 }
 
-export default function RmLayout({ children }: RmLayoutProps) {
+export default function DefaultLayout({ children }: DefaultLayoutProps) {
 	return (
 		<>
 			<img

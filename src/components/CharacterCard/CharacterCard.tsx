@@ -1,14 +1,40 @@
+'use client';
+
 import Image from 'next/image';
 import { helpers } from '@/utils/helpers';
 import { Character } from '@/repository/CharactersRepository';
+import { useConnectionsStore } from '@/store/connections';
 
-interface RmCharacterCardProps {
+interface CharacterCardProps {
 	character: Character;
+	positionCharacter: 'FIRST' | 'SECOND';
 }
 
-export default function RmCharacterCard({ character }: RmCharacterCardProps) {
+export default function CharacterCard({ character, positionCharacter }: CharacterCardProps) {
+	const { setCharacterSelected } = useConnectionsStore();
+
+	const playClickSound = () => {
+		try {
+			const audio = new Audio('/sounds/selected-click.mp3');
+			audio.volume = 0.5;
+			audio.play().catch((error) => {
+				console.warn('Error playing sound:', error);
+			});
+		} catch (error) {
+			console.warn('Error creating audio:', error);
+		}
+	};
+
+	const handleCharacterClick = () => {
+		playClickSound();
+		setCharacterSelected({ character, position: positionCharacter });
+	};
+
 	return (
-		<div className="group flex cursor-pointer gap-4 transition-all duration-300 hover:scale-105">
+		<div
+			className="group flex cursor-pointer gap-4 transition-all duration-300 select-none hover:scale-105"
+			onClick={handleCharacterClick}
+		>
 			<div className="relative h-max shadow-green-400 transition-all group-hover:shadow-lg before:absolute before:inset-0 before:z-0 before:mt-0 before:-mr-2 before:-mb-1 before:ml-2 before:max-h-28 before:rotate-3 before:border before:border-neutral-700 before:bg-neutral-300">
 				<div className="relative z-10 border border-neutral-700 bg-neutral-200 p-1 pb-4">
 					<Image
