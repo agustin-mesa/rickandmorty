@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import ConnectionButton from './ConnectionButton';
 
-// Mock del store
+// Mock store
 jest.mock('../../store/connections', () => ({
 	useConnectionsStore: () => ({
 		charactersSelected: {
@@ -16,7 +16,7 @@ jest.mock('../../store/connections', () => ({
 	})
 }));
 
-// Mock de framer-motion
+// Mock framer-motion
 jest.mock('framer-motion', () => ({
 	motion: {
 		div: ({ children, ...props }: any) => <div {...props}>{children}</div>
@@ -24,7 +24,7 @@ jest.mock('framer-motion', () => ({
 	AnimatePresence: ({ children }: any) => <>{children}</>
 }));
 
-// Mock del helper
+// Mock helper
 jest.mock('../../utils/helpers', () => ({
 	helpers: {
 		cn: (...classes: string[]) => classes.filter(Boolean).join(' ')

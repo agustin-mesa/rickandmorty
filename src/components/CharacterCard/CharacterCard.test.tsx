@@ -5,14 +5,14 @@ import '@testing-library/jest-dom';
 import CharacterCard from './CharacterCard';
 import { EnumCharacterStatus } from '@/repository/CharactersRepository';
 
-// Mock del hook
+// Mock hook
 jest.mock('../../hooks/useCharacterCard', () => ({
 	useCharacterCard: () => ({
 		handleCharacterClick: jest.fn()
 	})
 }));
 
-// Mock del store
+// Mock store
 jest.mock('../../store/connections', () => ({
 	useConnectionsStore: () => ({
 		charactersSelected: {
@@ -22,14 +22,14 @@ jest.mock('../../store/connections', () => ({
 	})
 }));
 
-// Mock de framer-motion
+// Mock framer-motion
 jest.mock('framer-motion', () => ({
 	motion: {
 		div: ({ children, ...props }: any) => <div {...props}>{children}</div>
 	}
 }));
 
-// Mock del helper
+// Mock helper
 jest.mock('../../utils/helpers', () => ({
 	helpers: {
 		cn: (...classes: string[]) => classes.filter(Boolean).join(' '),
@@ -39,7 +39,7 @@ jest.mock('../../utils/helpers', () => ({
 	}
 }));
 
-// Mock del componente CharacterImage
+// Mock CharacterImage component
 jest.mock('../CharacterImage', () => ({
 	CharacterImage: ({ src, alt }: any) => <img src={src} alt={alt} />
 }));
