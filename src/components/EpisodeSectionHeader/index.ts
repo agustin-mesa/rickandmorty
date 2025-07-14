@@ -1,1 +1,1 @@
-export { default as EpisodeSectionHeader } from './EpisodeSectionHeader'
+export { default as EpisodeSectionHeader } from './EpisodeSectionHeader';

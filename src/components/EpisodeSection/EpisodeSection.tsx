@@ -7,24 +7,62 @@ import { EpisodeSectionHeader } from '@/components/EpisodeSectionHeader';
 import { helpers } from '@/utils/helpers';
 
 interface EpisodeSectionProps {
-	episodes: Episode[];
 	imageSrc: string;
 	imageAlt: string;
 	positionCharacter: 'FIRST' | 'SECOND' | 'BETWEEN';
 }
 
 export default function EpisodeSection({
-	episodes,
 	imageSrc,
 	imageAlt,
 	positionCharacter
 }: EpisodeSectionProps) {
-	const { charactersSelected } = useConnectionsStore();
+	const { charactersSelected, filteredEpisodes, episodesLoading } = useConnectionsStore();
 
 	const titles = {
 		FIRST: `Only ${helpers.string.getFirstWord(charactersSelected?.FIRST?.name)} Episodes`,
 		SECOND: `Only ${helpers.string.getFirstWord(charactersSelected?.SECOND?.name)} Episodes`,
 		BETWEEN: 'Shared Episodes'
+	};
+
+	const getEpisodesForSection = (): Episode[] => {
+		switch (positionCharacter) {
+			case 'FIRST':
+				return filteredEpisodes.firstCharacterOnly;
+			case 'SECOND':
+				return filteredEpisodes.secondCharacterOnly;
+			case 'BETWEEN':
+				return filteredEpisodes.shared;
+			default:
+				return [];
+		}
+	};
+
+	const renderEpisodeContent = () => {
+		if (episodesLoading) {
+			return (
+				<div className="flex items-center justify-center p-4">
+					<div className="text-sm text-neutral-600">Loading episodes...</div>
+				</div>
+			);
+		}
+
+		const episodes = getEpisodesForSection();
+
+		if (episodes.length === 0) {
+			const hasSelectedCharacters = charactersSelected.FIRST || charactersSelected.SECOND;
+			const message = hasSelectedCharacters
+				? 'No episodes found for this selection'
+				: 'Select characters to see episodes';
+
+			return (
+				<div className="flex items-center justify-center p-4">
+					<div className="text-sm text-neutral-600">{message}</div>
+				</div>
+			);
+		}
+
+		return episodes.map((episode) => <EpisodeItem key={episode.id} episode={episode} />);
 	};
 
 	return (
@@ -40,9 +78,7 @@ export default function EpisodeSection({
 					<div className="h-full flex-1 bg-[#5A7580] p-2">
 						<div className="relative h-full flex-1 bg-[#FFEFD8]">
 							<div className="scrollbar-rick-morty flex max-h-[20vh] flex-col gap-2 overflow-y-auto p-2">
-								{episodes?.map((episode) => (
-									<EpisodeItem key={episode.id} episode={episode} />
-								))}
+								{renderEpisodeContent()}
 							</div>
 						</div>
 					</div>

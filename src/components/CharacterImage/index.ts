@@ -1,1 +1,1 @@
-export { default as CharacterImage } from './CharacterImage'
+export { default as CharacterImage } from './CharacterImage';

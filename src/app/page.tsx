@@ -1,20 +1,65 @@
+'use client';
+
 import { CharacterSection } from '@/components/CharacterSection';
 import { ConnectionButton } from '@/components/ConnectionButton';
 import { EpisodeSection } from '@/components/EpisodeSection';
 import { PageHeader } from '@/components/PageHeader';
 import { CharactersRepository } from '@/repository/CharactersRepository';
-import { EpisodesRepository } from '@/repository/EpisodesRepository';
-import { use } from 'react';
+import { useConnectionsStore } from '@/store/connections';
+import { useEffect } from 'react';
 
 const charactersRepository = new CharactersRepository();
-const episodesRepository = new EpisodesRepository();
 
 export default function Home() {
-	const characters = use(charactersRepository.getCharacters());
-	const episodes = use(episodesRepository.getEpisodes());
+	const {
+		charactersData,
+		paginationFirst,
+		paginationSecond,
+		setCharactersData,
+		setPaginationFirst,
+		setPaginationSecond
+	} = useConnectionsStore();
 
-	if (!characters?.results || !episodes?.results) {
-		return <div>Loading...</div>;
+	useEffect(() => {
+		loadCharacters(1, 'FIRST');
+		loadCharacters(1, 'SECOND');
+	}, []);
+
+	const loadCharacters = async (page: number, position: 'FIRST' | 'SECOND') => {
+		const setPagination = position === 'FIRST' ? setPaginationFirst : setPaginationSecond;
+
+		setPagination({ isLoading: true });
+
+		try {
+			const data = await charactersRepository.getCharacters(page);
+
+			setCharactersData(data);
+			setPagination({
+				currentPage: page,
+				totalPages: data.info.pages,
+				isLoading: false
+			});
+		} catch (error) {
+			console.error('Error loading characters:', error);
+			setPagination({ isLoading: false });
+		}
+	};
+
+	const handlePageChange = (page: number, position: 'FIRST' | 'SECOND') => {
+		loadCharacters(page, position);
+	};
+
+	if (!charactersData) {
+		return (
+			<div className="flex min-h-[100dvh] items-center justify-center">
+				<div className="text-center">
+					<div className="text-xl font-bold text-[#CAB580]">Loading...</div>
+					<div className="text-sm text-neutral-300">
+						Fetching Rick and Morty characters
+					</div>
+				</div>
+			</div>
+		);
 	}
 
 	return (
@@ -26,41 +71,42 @@ export default function Home() {
 
 			<div className="flex gap-6">
 				<CharacterSection
-					characters={characters.results}
-					positionCharacter="FIRST"
+					characters={charactersData.results}
 					title="CHARACTER #1"
 					imageSrc="/assets/table-01.svg"
 					imageAlt="table-01"
+					positionCharacter="FIRST"
+					pagination={paginationFirst}
+					onPageChange={(page) => handlePageChange(page, 'FIRST')}
 				/>
 
 				<ConnectionButton />
 
 				<CharacterSection
-					characters={characters.results}
-					positionCharacter="SECOND"
+					characters={charactersData.results}
 					title="CHARACTER #2"
 					imageSrc="/assets/table-02.svg"
 					imageAlt="table-02"
+					positionCharacter="SECOND"
+					pagination={paginationSecond}
+					onPageChange={(page) => handlePageChange(page, 'SECOND')}
 				/>
 			</div>
 
 			<div className="flex gap-4">
 				<EpisodeSection
-					episodes={episodes.results}
 					imageSrc="/assets/table-03.svg"
 					imageAlt="table-03"
 					positionCharacter="FIRST"
 				/>
 
 				<EpisodeSection
-					episodes={episodes.results}
 					imageSrc="/assets/table-04.svg"
 					imageAlt="table-04"
 					positionCharacter="BETWEEN"
 				/>
 
 				<EpisodeSection
-					episodes={episodes.results}
 					imageSrc="/assets/table-05.svg"
 					imageAlt="table-05"
 					positionCharacter="SECOND"
