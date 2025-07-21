@@ -1,5 +1,5 @@
 import LayoutStatic from '@/components/LayoutStatic';
-import IntroVideoPlayer from '@/components/ui/IntroVideoPlayer';
+import IntroVideoPlayer from '@/components/IntroVideoPlayer';
 
 interface DefaultLayoutProps {
 	children: React.ReactNode;
