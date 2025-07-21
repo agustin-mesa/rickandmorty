@@ -22,12 +22,12 @@ export default function EpisodeContent({
 
 	if (episodes.length === 0) {
 		const message = hasSelectedCharacters
-			? 'No episodes found for this selection'
-			: 'Select characters to see episodes';
+			? 'No episodes where only this character appears.'
+			: 'Select characters to discover their episodes!';
 
 		return (
 			<div className="flex items-center justify-center p-4">
-				<div className="text-sm text-neutral-600">{message}</div>
+				<div className="text-center text-xs text-neutral-600">{message}</div>
 			</div>
 		);
 	}
