@@ -45,7 +45,7 @@ describe('UiPopover', () => {
 	it('hides backdrop when showBackdrop is false', () => {
 		render(<UiPopover {...defaultProps} showBackdrop={false} />);
 
-		const backdrop = document.querySelector('.bg-black\\/20');
+		const backdrop = document.querySelector('.fixed.inset-0');
 		expect(backdrop).not.toBeInTheDocument();
 	});
 
@@ -53,7 +53,8 @@ describe('UiPopover', () => {
 		const user = userEvent.setup();
 		render(<UiPopover {...defaultProps} />);
 
-		const backdrop = document.querySelector('.bg-black\\/20');
+		// Find backdrop by its position and background classes
+		const backdrop = document.querySelector('.fixed.inset-0');
 		if (backdrop) {
 			await user.click(backdrop);
 		}
@@ -66,7 +67,8 @@ describe('UiPopover', () => {
 		const onClose = jest.fn();
 		render(<UiPopover {...defaultProps} onClose={onClose} closeOnBackdropClick={false} />);
 
-		const backdrop = document.querySelector('.bg-black\\/20');
+		// Find backdrop by its position and background classes
+		const backdrop = document.querySelector('.fixed.inset-0');
 		if (backdrop) {
 			await user.click(backdrop);
 		}
@@ -101,15 +103,15 @@ describe('UiPopover', () => {
 		expect(popover).toHaveClass('left-full', 'top-1/2', '-translate-y-1/2', 'ml-2');
 	});
 
-	it('applies size classes correctly', () => {
-		const { rerender } = render(<UiPopover {...defaultProps} />);
+	it('applies custom content classes correctly', () => {
+		const { rerender } = render(<UiPopover {...defaultProps} contentClassName="w-64" />);
 
 		let popover = screen.getByText('Popover content').closest('.absolute');
 		expect(popover).toHaveClass('w-64');
 
-		rerender(<UiPopover {...defaultProps} />);
+		rerender(<UiPopover {...defaultProps} contentClassName="w-96" />);
 		popover = screen.getByText('Popover content').closest('.absolute');
-		expect(popover).toHaveClass('w-[28rem]');
+		expect(popover).toHaveClass('w-96');
 	});
 
 	it('applies backdrop blur when enabled', () => {

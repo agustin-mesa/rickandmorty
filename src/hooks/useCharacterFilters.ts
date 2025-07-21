@@ -55,11 +55,10 @@ export function useCharacterFilters({
 	});
 
 	useEffect(() => {
-		setFilters((prevFilters) => ({
+		setFilters({
 			...DEFAULT_FILTERS,
-			...initialFilters,
-			...prevFilters
-		}));
+			...initialFilters
+		});
 	}, [initialFilters]);
 
 	const hasActiveFilters = Object.values(filters).some(

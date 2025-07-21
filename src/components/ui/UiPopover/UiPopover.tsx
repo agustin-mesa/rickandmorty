@@ -1,4 +1,4 @@
-import { forwardRef, ReactNode } from 'react';
+import { forwardRef, ReactNode, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePopover } from '@/hooks/usePopover';
 import { helpers } from '@/utils/helpers';
@@ -67,9 +67,11 @@ const UiPopover = forwardRef<HTMLDivElement, UiPopoverProps>(
 		},
 		ref
 	) => {
+		// Only pass onClose to usePopover if both backdrop click and escape are enabled
+		// because usePopover handles both behaviors together
 		const { popoverRef } = usePopover({
 			isOpen,
-			onClose: closeOnEscape ? onClose : () => {},
+			onClose: closeOnBackdropClick && closeOnEscape ? onClose : () => {},
 			triggerRef
 		});
 
@@ -78,6 +80,42 @@ const UiPopover = forwardRef<HTMLDivElement, UiPopoverProps>(
 				onClose();
 			}
 		};
+
+		// Handle escape key and click outside separately when usePopover can't handle them
+		useEffect(() => {
+			const handleEscapeKey = (event: KeyboardEvent) => {
+				if (event.key === 'Escape' && isOpen && closeOnEscape) {
+					onClose();
+				}
+			};
+
+			const handleClickOutside = (event: MouseEvent) => {
+				if (!isOpen || !closeOnBackdropClick) return;
+
+				const target = event.target as Node;
+				const isClickInsidePopover = popoverRef.current?.contains(target);
+				const isClickInsideTrigger = triggerRef?.current?.contains(target);
+
+				if (!isClickInsidePopover && !isClickInsideTrigger) {
+					onClose();
+				}
+			};
+
+			// Only add manual listeners when usePopover isn't handling them
+			if (isOpen && (!closeOnBackdropClick || !closeOnEscape)) {
+				if (closeOnEscape) {
+					document.addEventListener('keydown', handleEscapeKey);
+				}
+				if (closeOnBackdropClick) {
+					document.addEventListener('mousedown', handleClickOutside);
+				}
+			}
+
+			return () => {
+				document.removeEventListener('keydown', handleEscapeKey);
+				document.removeEventListener('mousedown', handleClickOutside);
+			};
+		}, [isOpen, closeOnEscape, closeOnBackdropClick, onClose, triggerRef, popoverRef]);
 
 		const backdropClasses = helpers.cn(
 			'fixed inset-0',

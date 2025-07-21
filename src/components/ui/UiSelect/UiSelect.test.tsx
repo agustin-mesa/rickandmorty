@@ -174,7 +174,8 @@ describe('UiSelect', () => {
 	});
 
 	it('handles value selection correctly', () => {
-		render(<UiSelect options={mockOptions} value="option2" />);
+		const mockOnChange = jest.fn();
+		render(<UiSelect options={mockOptions} value="option2" onChange={mockOnChange} />);
 
 		const select = screen.getByRole('combobox') as HTMLSelectElement;
 		expect(select.value).toBe('option2');

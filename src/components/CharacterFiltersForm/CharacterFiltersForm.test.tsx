@@ -64,9 +64,9 @@ describe('CharacterFiltersForm', () => {
 		render(<CharacterFiltersForm {...defaultProps} onStatusChange={onStatusChange} />);
 
 		const statusSelect = screen.getByLabelText(/status/i);
-		await user.selectOptions(statusSelect, 'dead');
+		await user.selectOptions(statusSelect, 'Dead');
 
-		expect(onStatusChange).toHaveBeenCalledWith('dead');
+		expect(onStatusChange).toHaveBeenCalledWith('Dead');
 	});
 
 	it('calls onGenderChange when gender select changes', async () => {
@@ -76,9 +76,9 @@ describe('CharacterFiltersForm', () => {
 		render(<CharacterFiltersForm {...defaultProps} onGenderChange={onGenderChange} />);
 
 		const genderSelect = screen.getByLabelText(/gender/i);
-		await user.selectOptions(genderSelect, 'female');
+		await user.selectOptions(genderSelect, 'Female');
 
-		expect(onGenderChange).toHaveBeenCalledWith('female');
+		expect(onGenderChange).toHaveBeenCalledWith('Female');
 	});
 
 	it('disables all controls when loading', () => {
