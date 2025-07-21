@@ -20,7 +20,7 @@ export default function EpisodeContent({
 		);
 	}
 
-	if (episodes.length === 0) {
+	if (!episodes.length) {
 		const message = hasSelectedCharacters
 			? 'No episodes found for this selection'
 			: 'Select characters to see episodes';

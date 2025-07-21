@@ -8,7 +8,7 @@ interface CharacterListProps {
 }
 
 export default function CharacterList({ characters, positionCharacter }: CharacterListProps) {
-	if (!characters || characters.length === 0) {
+	if (!characters || !characters.length) {
 		return (
 			<div className="flex items-center justify-center p-4">
 				<div className="text-sm text-neutral-600">No characters found</div>

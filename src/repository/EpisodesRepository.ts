@@ -27,7 +27,7 @@ export interface EpisodesResponse {
 
 export class EpisodesRepository extends BaseHttpRepository {
 	async getEpisodesByIds(params: { ids: number[] }): Promise<Episode[]> {
-		if (params.ids.length === 0) return [];
+		if (!params.ids.length) return [];
 
 		const response = await this.send<Episode[]>({
 			method: 'get',

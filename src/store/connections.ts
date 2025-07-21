@@ -182,7 +182,7 @@ export const useConnectionsStore = create<ConnectionsStore>((set, get) => ({
 
 			const allEpisodeIds = [...new Set([...firstEpisodeIds, ...secondEpisodeIds])];
 
-			if (allEpisodeIds.length === 0) {
+			if (!allEpisodeIds.length) {
 				setFilteredEpisodes(createEmptyFilteredEpisodes());
 				return;
 			}
