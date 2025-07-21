@@ -3,13 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { useConnectionsStore } from '@/store/connections';
-import {
-	connectionButtonVariants,
-	buttonImageVariants,
-	loadingSpinnerVariants,
-	buttonTextVariants,
-	pulseVariants
-} from './animations';
+import { CONNECTION_BUTTON_ANIMATIONS } from './animations';
 import { helpers } from '@/utils/helpers';
 
 interface ConnectionButtonProps {
@@ -32,14 +26,14 @@ export default function ConnectionButton({ className }: ConnectionButtonProps) {
 	return (
 		<motion.div
 			className={helpers.cn('flex flex-col items-center justify-center gap-2', className)}
-			variants={connectionButtonVariants}
+			variants={CONNECTION_BUTTON_ANIMATIONS.connectionButtonVariants}
 			initial="hidden"
 			animate="visible"
 			data-testid="connection-button"
 		>
 			<div className="relative">
 				<motion.div
-					variants={buttonImageVariants}
+					variants={CONNECTION_BUTTON_ANIMATIONS.buttonImageVariants}
 					initial="initial"
 					animate={isDisabled ? 'disabled' : 'enabled'}
 					onClick={handleConnectionClick}
@@ -59,12 +53,12 @@ export default function ConnectionButton({ className }: ConnectionButtonProps) {
 					{episodesLoading && (
 						<motion.div
 							className="absolute inset-0 flex items-center justify-center"
-							variants={loadingSpinnerVariants}
+							variants={CONNECTION_BUTTON_ANIMATIONS.loadingSpinnerVariants}
 							initial="initial"
 							animate="visible"
 							exit="hidden"
 						>
-							<div className="border-title h-8 w-8 animate-spin rounded-full border-b-2"></div>
+							<div className="border-title size-8 animate-spin rounded-full border-b-2"></div>
 						</motion.div>
 					)}
 				</AnimatePresence>
@@ -72,14 +66,16 @@ export default function ConnectionButton({ className }: ConnectionButtonProps) {
 
 			<motion.div
 				className="text-center"
-				variants={buttonTextVariants}
+				variants={CONNECTION_BUTTON_ANIMATIONS.buttonTextVariants}
 				initial="initial"
 				animate={episodesLoading ? 'loading' : 'visible'}
 				data-testid="connection-button-text"
 			>
 				<motion.div
 					className="text-xs text-neutral-400"
-					variants={bothCharactersSelected ? pulseVariants : {}}
+					variants={
+						bothCharactersSelected ? CONNECTION_BUTTON_ANIMATIONS.pulseVariants : {}
+					}
 					animate={bothCharactersSelected && !episodesLoading ? 'pulse' : 'initial'}
 				>
 					{!bothCharactersSelected

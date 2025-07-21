@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { EpisodeSectionHeader } from '@/components/EpisodeSectionHeader';
 import { EpisodeContent } from '@/components/EpisodeContent';
 import { useEpisodeSection } from '@/hooks/useEpisodeSection';
-import { episodeSectionVariants, episodeContentVariants } from './animations';
+import { EPISODE_SECTION_ANIMATIONS } from './animations';
 
 interface EpisodeSectionProps {
 	imageSrc: string;
@@ -23,7 +23,7 @@ export default function EpisodeSection({
 	return (
 		<motion.div
 			className="flex flex-1 flex-col gap-2"
-			variants={episodeSectionVariants}
+			variants={EPISODE_SECTION_ANIMATIONS.episodeSectionVariants}
 			initial="hidden"
 			animate="visible"
 		>
@@ -39,7 +39,7 @@ export default function EpisodeSection({
 						<div className="bg-card relative h-full flex-1">
 							<motion.div
 								className="scrollbar-rick-morty flex max-h-[20vh] flex-col gap-2 overflow-y-auto p-2"
-								variants={episodeContentVariants}
+								variants={EPISODE_SECTION_ANIMATIONS.episodeContentVariants}
 								initial="hidden"
 								animate="visible"
 							>

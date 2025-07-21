@@ -18,7 +18,7 @@ export default function EpisodeSectionHeader({
 			<img
 				src={imageSrc}
 				alt={imageAlt}
-				className="pointer-events-none h-full w-full object-cover select-none"
+				className="pointer-events-none size-full object-cover select-none"
 			/>
 			<div className="absolute inset-0 flex items-center justify-center gap-4">
 				<CharacterImageDisplay position="FIRST" showCondition={positionCharacter} />

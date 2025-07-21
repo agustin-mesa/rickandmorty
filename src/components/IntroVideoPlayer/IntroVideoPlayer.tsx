@@ -54,7 +54,7 @@ export default function IntroVideoPlayer({ children }: IntroVideoPlayerProps) {
 				style={{ pointerEvents: hideGif ? 'none' : 'auto' }}
 			>
 				<motion.div
-					className="h-full w-full"
+					className="size-full"
 					initial={{ opacity: 0 }}
 					animate={{ opacity: isGifLoaded ? 1 : 0 }}
 					transition={{
@@ -65,7 +65,7 @@ export default function IntroVideoPlayer({ children }: IntroVideoPlayerProps) {
 					<Image
 						src="/assets/intro.gif"
 						alt="intro"
-						className="h-full w-full object-cover"
+						className="size-full object-cover"
 						width={100}
 						height={100}
 						draggable={false}

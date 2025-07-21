@@ -1,7 +1,13 @@
+import { useState, useRef } from 'react';
 import { TableHeader } from '@/components/TableHeader';
-import { Character } from '@/repository/CharactersRepository';
+import {
+	Character,
+	EnumCharacterStatus,
+	EnumCharacterGender
+} from '@/repository/CharactersRepository';
 import { PaginationInfo } from '@/store/connections';
 import { CharacterSectionContent } from '@/components/CharacterSectionContent';
+import { CharacterFiltersPopover } from '@/components/CharacterFiltersPopover';
 
 interface CharacterSectionProps {
 	characters: Character[];
@@ -10,7 +16,21 @@ interface CharacterSectionProps {
 	imageAlt: string;
 	positionCharacter: 'FIRST' | 'SECOND';
 	pagination: PaginationInfo;
+	filters: {
+		name?: string;
+		status?: EnumCharacterStatus;
+		gender?: EnumCharacterGender;
+	};
 	onPageChange: (page: number) => void;
+	onFiltersChange: (
+		filters: Partial<{
+			name?: string;
+			status?: EnumCharacterStatus;
+			gender?: EnumCharacterGender;
+		}>
+	) => void;
+	onApplyFilters: () => void;
+	onResetFilters: () => void;
 }
 
 export default function CharacterSection({
@@ -20,11 +40,49 @@ export default function CharacterSection({
 	imageAlt,
 	positionCharacter,
 	pagination,
-	onPageChange
+	filters,
+	onPageChange,
+	onFiltersChange,
+	onApplyFilters,
+	onResetFilters
 }: CharacterSectionProps) {
+	const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+	const filterButtonRef = useRef<HTMLDivElement>(null);
+
+	const hasActiveFilters = Object.values(filters).some(
+		(value) => value !== undefined && value !== ''
+	);
+
+	const handleFiltersToggle = () => {
+		setIsFiltersOpen(!isFiltersOpen);
+	};
+
+	const handleFiltersClose = () => {
+		setIsFiltersOpen(false);
+	};
+
 	return (
-		<div className="flex flex-1 flex-col gap-2">
-			<TableHeader title={title} imageSrc={imageSrc} imageAlt={imageAlt} />
+		<div className="relative flex flex-1 flex-col gap-2">
+			<div ref={filterButtonRef}>
+				<TableHeader
+					title={title}
+					imageSrc={imageSrc}
+					imageAlt={imageAlt}
+					onFiltersClick={handleFiltersToggle}
+					hasActiveFilters={hasActiveFilters}
+				/>
+			</div>
+
+			<CharacterFiltersPopover
+				filters={filters}
+				onFiltersChange={onFiltersChange}
+				onApplyFilters={onApplyFilters}
+				onResetFilters={onResetFilters}
+				isLoading={pagination.isLoading}
+				isOpen={isFiltersOpen}
+				onClose={handleFiltersClose}
+				triggerRef={filterButtonRef}
+			/>
 
 			<CharacterSectionContent
 				characters={characters}

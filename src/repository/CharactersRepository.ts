@@ -6,6 +6,13 @@ export enum EnumCharacterStatus {
 	Unknown = 'unknown'
 }
 
+export enum EnumCharacterGender {
+	Female = 'Female',
+	Male = 'Male',
+	Genderless = 'Genderless',
+	Unknown = 'unknown'
+}
+
 interface IOrigin {
 	name: string;
 	url: string;
@@ -29,6 +36,16 @@ export interface Character {
 	episode: string[];
 }
 
+export interface CharacterFilters {
+	name?: string;
+	status?: EnumCharacterStatus;
+	species?: string;
+	type?: string;
+	gender?: EnumCharacterGender;
+	page?: number;
+	[k: string]: unknown;
+}
+
 export interface CharactersResponse {
 	info: {
 		count: number;
@@ -40,7 +57,7 @@ export interface CharactersResponse {
 }
 
 export class CharactersRepository extends BaseHttpRepository {
-	async getCharacters(params: { page?: number }): Promise<CharactersResponse> {
+	async getCharacters(params: CharacterFilters = {}): Promise<CharactersResponse> {
 		const response = await this.send<CharactersResponse>({
 			method: 'get',
 			path: '/character',

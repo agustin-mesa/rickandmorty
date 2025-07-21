@@ -2,6 +2,20 @@ import { useConnectionsStore } from '@/store/connections';
 import { Episode } from '@/repository/EpisodesRepository';
 import { helpers } from '@/utils/helpers';
 
+/**
+ * The function `useEpisodeSection` in TypeScript retrieves and categorizes episodes based on the
+ * selected characters for display in a section.
+ * @param {'FIRST' | 'SECOND' | 'BETWEEN'} positionCharacter - The `positionCharacter` parameter in the
+ * `useEpisodeSection` function determines which section of episodes to display based on the selected
+ * characters. It can have one of three values: 'FIRST', 'SECOND', or 'BETWEEN'.
+ * @returns The `useEpisodeSection` function returns an object with the following properties:
+ * - `title`: A string representing the title of the section based on the `positionCharacter`
+ * parameter.
+ * - `episodes`: An array of `Episode` objects based on the `positionCharacter` parameter.
+ * - `hasSelectedCharacters`: A boolean indicating whether there are selected characters for the
+ * section.
+ * - `episodesLoading
+ */
 export function useEpisodeSection(positionCharacter: 'FIRST' | 'SECOND' | 'BETWEEN') {
 	const { charactersSelected, filteredEpisodes, episodesLoading } = useConnectionsStore();
 

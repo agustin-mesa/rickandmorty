@@ -2,10 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { ReactNode } from 'react';
-import {
-	characterListVariants,
-	characterListItemVariants
-} from '@/components/CharacterList/animations';
+import { CHARACTER_LIST_ANIMATIONS } from '@/components/CharacterList/animations';
 
 interface CharacterListWrapperProps {
 	children: ReactNode;
@@ -14,19 +11,24 @@ interface CharacterListWrapperProps {
 export default function CharacterListWrapper({ children }: CharacterListWrapperProps) {
 	return (
 		<motion.div
-			variants={characterListVariants}
+			variants={CHARACTER_LIST_ANIMATIONS.characterListVariants}
 			initial="hidden"
 			animate="visible"
 			className="contents"
 		>
 			{Array.isArray(children) ? (
 				children.map((child, index) => (
-					<motion.div key={index} variants={characterListItemVariants}>
+					<motion.div
+						key={index}
+						variants={CHARACTER_LIST_ANIMATIONS.characterListItemVariants}
+					>
 						{child}
 					</motion.div>
 				))
 			) : (
-				<motion.div variants={characterListItemVariants}>{children}</motion.div>
+				<motion.div variants={CHARACTER_LIST_ANIMATIONS.characterListItemVariants}>
+					{children}
+				</motion.div>
 			)}
 		</motion.div>
 	);

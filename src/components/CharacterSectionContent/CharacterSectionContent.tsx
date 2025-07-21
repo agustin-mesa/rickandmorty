@@ -5,10 +5,7 @@ import { CharacterList } from '@/components/CharacterList';
 import { UiPagination } from '@/components/ui/UiPagination';
 import { Character } from '@/repository/CharactersRepository';
 import { PaginationInfo } from '@/store/connections';
-import {
-	characterListVariants,
-	paginationVariants
-} from '@/components/CharacterSection/animations';
+import { CHARACTER_SECTION_ANIMATIONS } from '@/components/CharacterSection/animations';
 
 interface CharacterSectionContentProps {
 	characters: Character[];
@@ -26,13 +23,13 @@ export default function CharacterSectionContent({
 	return (
 		<>
 			<motion.div
-				className="z-50 grid max-h-[40vh] grid-cols-2 gap-4 overflow-y-auto px-4 max-xl:grid-cols-1"
-				variants={characterListVariants}
+				className="z-30 grid max-h-[40vh] grid-cols-2 gap-4 overflow-y-auto px-4 max-xl:grid-cols-1"
+				variants={CHARACTER_SECTION_ANIMATIONS.characterListVariants}
 			>
 				<CharacterList characters={characters} positionCharacter={positionCharacter} />
 			</motion.div>
 
-			<motion.div variants={paginationVariants}>
+			<motion.div variants={CHARACTER_SECTION_ANIMATIONS.paginationVariants}>
 				<UiPagination
 					currentPage={pagination.currentPage}
 					totalPages={pagination.totalPages}

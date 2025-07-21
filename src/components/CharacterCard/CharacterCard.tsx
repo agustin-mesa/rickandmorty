@@ -7,7 +7,7 @@ import { CharacterImage } from '@/components/CharacterImage';
 import { useCharacterCard } from '@/hooks/useCharacterCard';
 import { useConnectionsStore } from '@/store/connections';
 import Image from 'next/image';
-import { characterCardVariants } from './animations';
+import { CHARACTER_CARD_ANIMATIONS } from './animations';
 
 interface CharacterCardProps {
 	character: Character;
@@ -28,7 +28,7 @@ export default function CharacterCard({ character, positionCharacter }: Characte
 		return (
 			<motion.div
 				className="flex items-center justify-center p-4"
-				variants={characterCardVariants}
+				variants={CHARACTER_CARD_ANIMATIONS.characterCardVariants}
 				initial="hidden"
 				animate="visible"
 			>

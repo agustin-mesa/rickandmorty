@@ -44,6 +44,7 @@ html {
   /* Primary colors */
   --color-primary: #CAB580;
   --color-primary-dark: #84683D;
+  --color-accent-secondary: #05df72;
 
   /* Background colors */
   --color-surface: #FFEFD8;

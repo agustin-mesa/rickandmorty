@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { UiPaginationButton } from '@/components/ui/UiPaginationButton';
 import { UiPaginationNavButton } from '@/components/ui/UiPaginationNavButton';
-import { paginationVariants, paginationButtonVariants } from './animations';
+import { UI_PAGINATION_ANIMATIONS } from './animations';
 
 interface UiPaginationProps {
 	currentPage: number;
@@ -26,11 +26,11 @@ export default function UiPagination({
 	return (
 		<motion.div
 			className="flex items-center justify-center gap-2 p-2"
-			variants={paginationVariants}
+			variants={UI_PAGINATION_ANIMATIONS.paginationVariants}
 			initial="hidden"
 			animate="visible"
 		>
-			<motion.div variants={paginationButtonVariants}>
+			<motion.div variants={UI_PAGINATION_ANIMATIONS.paginationButtonVariants}>
 				<UiPaginationNavButton
 					onClick={() => onPageChange(currentPage - 1)}
 					disabled={!canGoPrevious || isLoading}
@@ -38,9 +38,15 @@ export default function UiPagination({
 				/>
 			</motion.div>
 
-			<motion.div className="flex items-center gap-1" variants={paginationVariants}>
+			<motion.div
+				className="flex items-center gap-1"
+				variants={UI_PAGINATION_ANIMATIONS.paginationVariants}
+			>
 				{Array.from({ length: Math.min(5, totalPages) }, (_, i) => (
-					<motion.div key={i} variants={paginationButtonVariants}>
+					<motion.div
+						key={i}
+						variants={UI_PAGINATION_ANIMATIONS.paginationButtonVariants}
+					>
 						<UiPaginationButton
 							index={i}
 							currentPage={currentPage}
@@ -52,7 +58,7 @@ export default function UiPagination({
 				))}
 			</motion.div>
 
-			<motion.div variants={paginationButtonVariants}>
+			<motion.div variants={UI_PAGINATION_ANIMATIONS.paginationButtonVariants}>
 				<UiPaginationNavButton
 					onClick={() => onPageChange(currentPage + 1)}
 					disabled={!canGoNext || isLoading}

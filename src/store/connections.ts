@@ -1,4 +1,9 @@
-import { Character, CharactersResponse } from '@/repository/CharactersRepository';
+import {
+	Character,
+	CharactersResponse,
+	EnumCharacterStatus,
+	EnumCharacterGender
+} from '@/repository/CharactersRepository';
 import { Episode, EpisodesRepository } from '@/repository/EpisodesRepository';
 import { create } from 'zustand';
 
@@ -14,6 +19,14 @@ export interface FilteredEpisodes {
 	shared: Episode[];
 }
 
+export interface CharacterFiltersState {
+	name?: string;
+	status?: EnumCharacterStatus;
+	species?: string;
+	type?: string;
+	gender?: EnumCharacterGender;
+}
+
 export interface ConnectionsStore {
 	charactersSelected: Record<string, Character | null>;
 
@@ -21,6 +34,9 @@ export interface ConnectionsStore {
 	charactersDataSecond: CharactersResponse | null;
 	paginationFirst: PaginationInfo;
 	paginationSecond: PaginationInfo;
+
+	filtersFirst: CharacterFiltersState;
+	filtersSecond: CharacterFiltersState;
 
 	filteredEpisodes: FilteredEpisodes;
 	episodesLoading: boolean;
@@ -32,6 +48,11 @@ export interface ConnectionsStore {
 
 	setPaginationFirst: (pagination: Partial<PaginationInfo>) => void;
 	setPaginationSecond: (pagination: Partial<PaginationInfo>) => void;
+
+	setFiltersFirst: (filters: Partial<CharacterFiltersState>) => void;
+	setFiltersSecond: (filters: Partial<CharacterFiltersState>) => void;
+	resetFiltersFirst: () => void;
+	resetFiltersSecond: () => void;
 
 	setFilteredEpisodes: (episodes: FilteredEpisodes) => void;
 	setEpisodesLoading: (loading: boolean) => void;
@@ -52,6 +73,14 @@ const initialPaginationState: PaginationInfo = {
 	isLoading: false
 };
 
+const initialFiltersState: CharacterFiltersState = {
+	name: '',
+	status: undefined,
+	species: '',
+	type: '',
+	gender: undefined
+};
+
 export const useConnectionsStore = create<ConnectionsStore>((set, get) => ({
 	charactersSelected: {
 		FIRST: null,
@@ -63,6 +92,9 @@ export const useConnectionsStore = create<ConnectionsStore>((set, get) => ({
 
 	paginationFirst: { ...initialPaginationState },
 	paginationSecond: { ...initialPaginationState },
+
+	filtersFirst: { ...initialFiltersState },
+	filtersSecond: { ...initialFiltersState },
 
 	filteredEpisodes: createEmptyFilteredEpisodes(),
 	episodesLoading: false,
@@ -102,6 +134,25 @@ export const useConnectionsStore = create<ConnectionsStore>((set, get) => ({
 				...pagination
 			}
 		}),
+
+	setFiltersFirst: (filters) =>
+		set({
+			filtersFirst: {
+				...get().filtersFirst,
+				...filters
+			}
+		}),
+
+	setFiltersSecond: (filters) =>
+		set({
+			filtersSecond: {
+				...get().filtersSecond,
+				...filters
+			}
+		}),
+
+	resetFiltersFirst: () => set({ filtersFirst: { ...initialFiltersState } }),
+	resetFiltersSecond: () => set({ filtersSecond: { ...initialFiltersState } }),
 
 	setFilteredEpisodes: (episodes) => set({ filteredEpisodes: episodes }),
 	setEpisodesLoading: (loading) => set({ episodesLoading: loading }),
