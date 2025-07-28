@@ -1,3 +1,6 @@
+// Re-export UI components for convenience
+export * from './ui';
+
 // Components Central Barrel File
 export { default as CharacterCard } from './CharacterCard/CharacterCard';
 export { default as CharacterFiltersForm } from './CharacterFiltersForm/CharacterFiltersForm';
@@ -18,6 +21,3 @@ export { default as LayoutStatic } from './LayoutStatic/LayoutStatic';
 export { default as MainWrapper } from './MainWrapper/MainWrapper';
 export { default as PageHeader } from './PageHeader/PageHeader';
 export { default as TableHeader } from './TableHeader/TableHeader';
-
-// Re-export UI components for convenience
-export * from './ui';
