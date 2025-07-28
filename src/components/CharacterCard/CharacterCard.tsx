@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { helpers } from '@/utils/helpers';
 import { Character } from '@/repository/CharactersRepository';
-import { CharacterImage } from '@/components/CharacterImage';
+import { CharacterImage } from '@/components';
 import { useCharacterCard } from '@/hooks/useCharacterCard';
 import { useConnectionsStore } from '@/store/connections';
 import Image from 'next/image';

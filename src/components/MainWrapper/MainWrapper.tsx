@@ -1,9 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { CharacterSection } from '@/components/CharacterSection';
-import { ConnectionButton } from '@/components/ConnectionButton';
-import { EpisodeSection } from '@/components/EpisodeSection';
+import { CharacterSection, ConnectionButton, EpisodeSection } from '@/components';
 import {
 	CharactersRepository,
 	CharactersResponse,

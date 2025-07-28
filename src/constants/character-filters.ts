@@ -1,5 +1,5 @@
 import { EnumCharacterStatus, EnumCharacterGender } from '@/repository/CharactersRepository';
-import { SelectOption } from '@/components/ui/UiSelect';
+import { SelectOption } from '@/components/ui';
 
 export const CHARACTER_STATUS_OPTIONS: SelectOption[] = [
 	{ value: '', label: 'All statuses' },

@@ -1,6 +1,6 @@
-import { CharacterCard } from '@/components/CharacterCard';
+import { CharacterCard } from '@/components';
 import { Character } from '@/repository/CharactersRepository';
-import { CharacterListWrapper } from '@/components/CharacterListWrapper';
+import { CharacterListWrapper } from '@/components';
 
 interface CharacterListProps {
 	characters: Character[];

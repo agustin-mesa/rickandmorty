@@ -1,7 +1,6 @@
 import { memo } from 'react';
 import { EnumCharacterStatus, EnumCharacterGender } from '@/repository/CharactersRepository';
-import { UiInput } from '@/components/ui/UiInput';
-import { UiSelect } from '@/components/ui/UiSelect';
+import { UiInput, UiSelect } from '@/components/ui';
 import { CHARACTER_STATUS_OPTIONS, CHARACTER_GENDER_OPTIONS } from '@/constants/character-filters';
 import { helpers } from '@/utils/helpers';
 

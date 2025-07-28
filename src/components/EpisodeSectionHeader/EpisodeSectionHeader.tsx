@@ -1,4 +1,4 @@
-import { CharacterImageDisplay } from '@/components/CharacterImageDisplay';
+import { CharacterImageDisplay } from '@/components';
 
 interface EpisodeSectionHeaderProps {
 	imageSrc: string;

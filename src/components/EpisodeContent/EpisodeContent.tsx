@@ -1,4 +1,4 @@
-import { EpisodeItem } from '@/components/EpisodeItem';
+import { EpisodeItem } from '@/components';
 import { Episode } from '@/repository/EpisodesRepository';
 
 interface EpisodeContentProps {

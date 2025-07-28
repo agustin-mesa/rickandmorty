@@ -1,8 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { CharacterList } from '@/components/CharacterList';
-import { UiPagination } from '@/components/ui/UiPagination';
+import { CharacterList } from '@/components';
+import { UiPagination } from '@/components/ui';
 import { Character } from '@/repository/CharactersRepository';
 import { PaginationInfo } from '@/store/connections';
 import { CHARACTER_SECTION_ANIMATIONS } from '@/components/CharacterSection/animations';

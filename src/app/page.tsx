@@ -1,6 +1,5 @@
 import { CharactersRepository } from '@/repository/CharactersRepository';
-import { PageHeader } from '@/components/PageHeader';
-import { MainWrapper } from '@/components/MainWrapper';
+import { PageHeader, MainWrapper } from '@/components';
 
 export default async function Home() {
 	const charactersRepository = new CharactersRepository();

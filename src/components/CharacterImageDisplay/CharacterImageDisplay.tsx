@@ -1,4 +1,4 @@
-import { CharacterImage } from '@/components/CharacterImage';
+import { CharacterImage } from '@/components';
 import { useConnectionsStore } from '@/store/connections';
 
 interface CharacterImageDisplayProps {

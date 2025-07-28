@@ -2,14 +2,9 @@
 
 import { memo } from 'react';
 import { EnumCharacterStatus, EnumCharacterGender } from '@/repository/CharactersRepository';
-import {
-	UiPopover,
-	UiPopoverHeader,
-	UiPopoverFooter,
-	UiPopoverClearButton
-} from '@/components/ui/UiPopover';
+import { UiPopover, UiPopoverHeader, UiPopoverFooter, UiPopoverClearButton } from '@/components/ui';
 import { useCharacterFilters, type CharacterFilters } from '@/hooks/useCharacterFilters';
-import { CharacterFiltersForm } from '@/components/CharacterFiltersForm';
+import { CharacterFiltersForm } from '@/components';
 
 export interface CharacterFiltersPopoverProps {
 	filters: {

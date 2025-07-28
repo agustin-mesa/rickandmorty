@@ -1,13 +1,12 @@
 import { useState, useRef } from 'react';
-import { TableHeader } from '@/components/TableHeader';
+import { TableHeader } from '@/components';
 import {
 	Character,
 	EnumCharacterStatus,
 	EnumCharacterGender
 } from '@/repository/CharactersRepository';
 import { PaginationInfo } from '@/store/connections';
-import { CharacterSectionContent } from '@/components/CharacterSectionContent';
-import { CharacterFiltersPopover } from '@/components/CharacterFiltersPopover';
+import { CharacterSectionContent, CharacterFiltersPopover } from '@/components';
 
 interface CharacterSectionProps {
 	characters: Character[];

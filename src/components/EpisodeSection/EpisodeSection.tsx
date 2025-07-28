@@ -1,8 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { EpisodeSectionHeader } from '@/components/EpisodeSectionHeader';
-import { EpisodeContent } from '@/components/EpisodeContent';
+import { EpisodeSectionHeader, EpisodeContent } from '@/components';
 import { useEpisodeSection } from '@/hooks/useEpisodeSection';
 import { EPISODE_SECTION_ANIMATIONS } from './animations';
 
